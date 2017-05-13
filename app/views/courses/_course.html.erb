@@ -1,0 +1,26 @@
+<div class="item" id="course-<%= course.id %>">
+  <div class="content">
+    <a class="header">
+      <%= course.name %>
+    </a>
+    <%= button_to "Create messages", controller: :courses, action: :create_messages, id: course.id, class: "ui primary button" %>
+
+    <% unless graph_image_exists?("#{course.name}-#{course.id}") %>
+      <%= button_to "Create Domain Graph", controller: :courses, action: :create_domain_graph, id: course.id, class: "ui primary button" %>
+    <% else %>
+      <%= link_to "Graph link", "/img/graphs/#{course.name}-#{course.id}.png", :target => "_blank" %>
+    <% end %>
+    <% course.students.each do |student| %>
+      <% if student.messages.any? %>
+        <div class="ui segment">
+        <div class="ui label">
+         ID: <%= student.original_id %>
+        </div>
+         <% student.messages.each do |msg| %>
+          <%= msg.content %>
+         <% end %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

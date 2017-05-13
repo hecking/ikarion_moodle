@@ -1,0 +1,30 @@
+@charset "utf-8";
+/*
+ Allow angular.js to be loaded in body, hiding cloaked elements until
+ templates compile.  The !important is important given that there may be
+ other selectors that are more specific or come later and might alter display.
+*/
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
+}
+.pleaseWaitIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 115px;
+  height: 115px;
+  margin-top: -57.5px;
+  /* half the height */
+
+  margin-left: -57.5px;
+  /* half the width */
+
+  background: url("../images/loading-animation.gif") center no-repeat;
+  background-size: 115px;
+  display: none;
+}
+[ng-cloak].pleaseWaitIcon {
+  display: block !important;
+}

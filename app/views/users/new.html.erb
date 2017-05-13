@@ -1,0 +1,31 @@
+<% provide(:title, "Users") %>
+
+<h1>Sign up</h1>
+
+<div class="ui form">
+  <%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages' %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "Repeat your password" %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <%= f.submit "Create my account", class: "ui button" %>
+  <% end %>
+
+</div>

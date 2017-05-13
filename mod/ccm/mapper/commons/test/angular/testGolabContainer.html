@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Test Golab container</title>
+    <link rel="stylesheet" type="text/css" href="../../css/golabUtils.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../libs/css/jquery.ui.all.css"/>
+    <script type="text/javascript" charset="utf-8" src="../../js/errorHandler.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/jsChecker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../libs/js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../libs/js/jquery-ui.custom.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../libs/js/angular/angular.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/utils.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/angular/golabUtils.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/golabContainer.js"></script>
+
+</head>
+<body ng-app="golabUtils">
+<h1>Test Golab Container</h1>
+
+<golabContainer containerTitle="test">
+    Some content
+</golabContainer>
+<br/>
+<golabContainer containerTitle="Canvas test">
+    <canvas id="canvasTest" width="200" height="100"></canvas>
+</golabContainer>
+
+<br/>
+<golabContainer containerTitle="Canvas drag test">
+    <canvas id="canvasDragTest" width="200" height="100"></canvas>
+</golabContainer>
+
+</body>
+</html>

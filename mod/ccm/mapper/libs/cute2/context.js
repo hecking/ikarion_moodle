@@ -1,0 +1,889 @@
+/*  $Id$	-*- mode: javascript -*-
+ *  
+ *  File	context.src
+ *  Part of	Cute
+ *  Author	Anjo Anjewierden, a.a.anjewierden@utwente.nl
+ *  Purpose	Custom implementation of context to take care of transformations
+ *  Works with	SWI-Prolog (www.swi-prolog.org)
+ *  
+ *  Notice	Copyright (c) 2014  University of Twente
+ *  
+ *  History	19/04/14  (Created)
+ *  		19/05/14  (Last modified)
+ */
+
+
+/*------------------------------------------------------------
+ *  Directives
+ *------------------------------------------------------------*/
+/*  Use with gcc -E -x c -P -C *.h > *.js 
+ */
+
+"use strict";
+
+/*------------------------------------------------------------
+ *  Low-level drawing routines
+ *------------------------------------------------------------*/
+
+(function() {
+    var cute = this.cute;
+    var c = ', ';
+
+    /**
+     *  A Context is a wrapper around a CanvasRenderingContext and has the
+     *  same methods.  Attributes are also represented as methods.
+     *
+     *  @constructor
+     *  @param {CanvasRenderingContext2D} Original context.
+     *  @returns {Context} For canvas drawing.
+     */
+    var Context = cute.Context = function(context, canvas) {
+        var ctx = this;
+
+        ctx._ctx = context;
+        ctx._canvas = canvas;
+        ctx._dummy = false;
+
+        ctx._debug = false;
+
+        ctx._plane = null;
+        ctx._planes = [];
+
+        return ctx;
+    }
+
+    Context.prototype.dummy = function(v0) { if (v0 === undefined) return this._dummy; this._dummy = v0; return this; };
+    Context.prototype.debug = function(v0) { if (v0 === undefined) return this._debug; this._debug = v0; return this; };
+
+    Context.prototype.push_plane = function(plane) {
+        var ctx = this;
+
+        if (ctx._debug)
+            console.log('.push_plahe ' + plane);
+
+        ctx._planes.push(plane);
+        ctx._plane = plane;
+
+        return ctx;
+    }
+
+    Context.prototype.pop_plane = function() {
+        var ctx = this;
+
+        if (ctx._debug)
+            console.log('.pop_plahe ');
+
+        ctx._planes.pop();
+
+        var len = ctx._planes.length;
+
+        if (len > 0)
+            ctx._plane = ctx._planes[len-1];
+        else
+            ctx._plane = null;
+
+        return ctx;
+    };
+
+    Context.prototype.start_parts = function(dr) {
+        var ctx = this;
+
+        ctx._drawable = dr;
+
+        if (ctx._debug)
+            console.log('.clear_parts ' + dr);
+
+        dr.clear_parts();
+
+        return ctx;
+    }
+
+    Context.prototype.end_parts = function(dr) {
+        var ctx = this;
+
+        ctx._drawable = null;
+
+        if (ctx._debug)
+            console.log('.end_parts ' + dr);
+
+        return ctx;
+    }
+
+    /**
+     *  See the MDN or Apple documentation for the basic methods.
+     *  The wrappers below are in alphabetical order.
+     */
+    Context.prototype.arc = function(x, y, radius, start, end, counter) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (ctx._debug)
+            console.log('.arc ' + x + c + y + c + radius + c + geo.degrees(start) + c + geo.degrees(end));
+
+
+        if (ctx._plane) {
+            var pl = ctx._plane;
+            var xy = pl.txy(x, y);
+            var rx = xy.x;
+            var ry = xy.y;
+            var rr = pl.tlx(radius);
+            var rsa = pl.tarc(start);
+            var rse = pl.tarc(end);
+
+            if (ctx._debug)
+                console.log('      ' + rx + c + ry + c + rr + c + geo.degrees(rsa) + c + geo.degrees(rse));
+
+
+            if (ctx._drawable)
+                ctx._drawable.add_arc(rx, ry, rr, rsa, rse);
+
+//            ctx._ctx.arc(rx, ry, rr, rsa, rse, default(counter,true));
+
+
+            var ds = Math.abs(rsa - Math.PI*2);
+            var de = Math.abs(rse - Math.PI*2);
+
+            ctx._ctx.arc(rx, ry, rr, ds, de, true);
+//            printf(' drawn ' + geo.degrees(ds) + c + geo.degrees(de));
+        } else
+            ctx._ctx.arc(x, y, radius, start, end, (counter === undefined ? true : counter));
+    }
+
+    Context.prototype.arcTo = function(x1, y1, x2, y2, radius) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (ctx._plane)
+            console.log('Context.arcTo not currently supported for cute.Plane');
+
+        ctx._ctx.arcTo(x1, y1, x2, y2, radius);
+
+        return ctx;
+    }
+
+    Context.prototype.beginPath = function() {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        ctx._ctx.beginPath();
+
+        return ctx;
+    }
+
+    Context.prototype.bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
+        if (this._dummy) return;
+
+        if (ctx._plane)
+            console.log('Context.bezierCurveTo not currently supported for cute.Plane');
+
+        ctx._ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+
+        return ctx;
+    }
+
+    Context.prototype.clearRect = function(x, y, w, h) {
+        var ctx = this;
+
+//        printf('Context.clearRect');
+
+        if (ctx._dummy)
+            return;
+
+        if (ctx._plane)
+            console.log('Context.clearRect not currently supported for cute.Plane');
+
+        ctx._ctx.clearRect(x, y, w, h);
+
+        return this;
+    }
+
+    Context.prototype.clip = function() {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        this._ctx.clip();
+    }
+
+    Context.prototype.closePath = function() {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        this._ctx.closePath();
+    }
+
+    Context.prototype.createImageData = function(w, h) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        return this._ctx.createImageData(w, h);
+    }
+
+    Context.prototype.createLinearGradient = function(x0, y0, x1, y1) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.createLinearGradient(x0, y0, x1, y1);
+    }
+
+    Context.prototype.createPattern = function(img, rep) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.createPattern(img, rep);
+    }
+
+    Context.prototype.createRadialGradient = function(x0, y0, r0, x1, y1, r1) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+    }
+
+    Context.prototype.drawImage = function(img, x, y) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        this._ctx.drawImage(img, x, y);
+    }
+
+    Context.prototype.fill = function() {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        this._ctx.fill();
+    }
+
+    Context.prototype.fillRect = function(x, y, w, h) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        this._ctx.fillRect(x, y, w, h);
+    }
+
+    Context.prototype.fillText = function(str, x, y) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        this._ctx.fillText(str, x, y);
+    }
+
+    Context.prototype.getImageData = function(x, y, w, h) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.getImageData(x, y, w, h);
+    }
+
+    Context.prototype.getLineDash = function() {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.getLineDash();
+    }
+
+    Context.prototype.isPointInPath = function(x, y) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.isPointInPath();
+    }
+
+    Context.prototype.isPointInStroke = function(x, y) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (this._dummy) return;
+        return this._ctx.isPointInStroek();
+    }
+
+    Context.prototype.lineTo = function(x, y) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (ctx._debug)
+            console.log('.lineTo ' + x + c + y);
+
+        if (ctx._plane) {
+            var pl = ctx._plane;
+            var xy = pl.txy(x, y);
+
+            if (ctx._debug)
+                console.log('        ' + xy.x + c + xy.y);
+
+            if (ctx._drawable)
+                ctx._drawable.add_lineTo(xy.x, xy.y);
+            ctx._ctx.lineTo(xy.x, xy.y);
+        } else
+            ctx._ctx.lineTo(x, y);
+    };
+
+    Context.prototype.measureText = function(str) {
+        if (this._dummy) return;
+        return this._ctx.measureText(str);
+    }
+
+    Context.prototype.moveTo = function(x, y) {
+        var ctx = this;
+
+        if (ctx._dummy)
+            return;
+
+        if (ctx._debug)
+            console.log('.moveTo ' + x + c + y);
+
+        if (ctx._plane) {
+            var pl = ctx._plane;
+            var xy = pl.txy(x, y);
+
+            if (ctx._debug)
+                console.log('        ' + xy.x + c + xy.y);
+
+            if (ctx._drawable)
+                ctx._drawable.add_lineTo(xy.x, xy.y);
+            ctx._ctx.moveTo(xy.x, xy.y);
+        } else
+            ctx._ctx.moveTo(x, y);
+    }
+
+/*
+    Context.prototype.putImageData = function(data, x, y, dx, dy, dw, dh) {
+        this._ctx.putImageData(data, x, y, dx, dy, dw, dh);
+    }
+*/
+    Context.prototype.putImageData = function(data, x, y) {
+        if (this._dummy) return;
+        this._ctx.putImageData(data, x, y);
+    }
+
+    Context.prototype.quadraticCurveTo = function(cpx, cpy, x, y) {
+        if (this._dummy) return;
+        this._ctx.quadraticCurveTo(cpx, cpy, x, y);
+    }
+
+    Context.prototype.rect = function(x, y, w, h) {
+        if (this._dummy) return;
+        this._ctx.rect(x, y, w, h);
+    }
+
+    Context.prototype.restore = function() {
+        if (this._dummy) return;
+        this._ctx.restore();
+    }
+
+    Context.prototype.rotate = function(angle) {
+        if (this._dummy) return;
+        this._ctx.rotate(angle);
+    }
+
+    Context.prototype.save = function() {
+        if (this._dummy) return;
+        this._ctx.save();
+    }
+
+    Context.prototype.scale = function(x, y) {
+        if (this._dummy) return;
+        this._ctx.scale(x, y);
+    }
+
+    Context.prototype.scrollPathIntoView = function() {
+        if (this._dummy) return;
+        this._ctx.scrollPathIntoView();
+    }
+
+    Context.prototype.setLineDash = function(dash) {
+        if (this._dummy) return;
+        if (this._ctx.setLineDash)
+            this._ctx.setLineDash(dash);
+    }
+
+    Context.prototype.setTransform = function(m11, m12, m21, m22, dx, dy) {
+        if (this._dummy) return;
+        this._ctx.setTransform(m11, m12, m21, m22, dx, dy);
+    }
+
+    Context.prototype.stroke = function() {
+        if (this._dummy) return;
+        this._ctx.stroke();
+    }
+
+    Context.prototype.strokeRect = function(x, y, w, h) {
+        if (this._dummy) return;
+        this._ctx.strokeRect(x, y, w, h);
+    }
+
+    Context.prototype.strokeText = function(str, x, y) {
+        if (this._dummy) return;
+        this._ctx.strokeText(str, x, y);
+    }
+
+    Context.prototype.transform = function(m11, m12, m21, m22, dx, dy) {
+        if (this._dummy) return;
+        this._ctx.transform(m11, m12, m21, m22, dx, dy);
+    }
+
+    Context.prototype.translate = function(x, y) {
+        if (this._dummy) return;
+        this._ctx.translate(x, y);
+    }
+
+
+    /**
+     *  Attributes of the CanvasRenderingContext2D are also implemented as
+     *  methods.  The convention is that if an argument is specified, the
+     *  value is changed (setter), and if no argument is given the value is
+     *  returned (getter).
+     */
+    Context.prototype.fillStyle = function(fill) {
+        if (this._dummy) return;
+        if (fill === undefined)
+            return this._ctx.fillStyle;
+
+        if (fill === null)
+            this._ctx.fillStyle = '#000000';
+        else if (fill instanceof cute.Colour)
+            this._ctx.fillStyle = fill.css();
+        else
+            this._ctx.fillStyle = fill;
+    }
+
+    Context.prototype.font = function(font) {
+        if (this._dummy) return;
+        if (font === undefined)
+            return this._ctx.font;
+
+        if (font instanceof cute.Font)
+            this._ctx.font = font.css();
+        else
+            this._ctx.font = font;
+    }
+
+    Context.prototype.globalAlpha = function(alpha) {
+        if (this._dummy) return;
+        if (alpha === undefined)
+            return this._ctx.globalAlpha;
+        this._ctx.globalAlpha = alpha;
+    }
+
+    Context.prototype.globalCompositeOperation = function(str) {
+        if (this._dummy) return;
+        if (str === undefined)
+            return this._ctx.globalCompositeOperation;
+        this._ctx.globalCompositeOperation = str;
+    }
+
+    Context.prototype.lineCap = function(cap) {
+        if (this._dummy) return;
+        if (cap === undefined)
+            return this._ctx.lineCap;
+        this._ctx.lineCap = cap;
+    }
+
+    Context.prototype.lineDashOffset = function(offset) {
+        if (this._dummy) return;
+        if (offset === undefined)
+            return this._ctx.lineDashOffset;
+        this._ctx.lineDashOffset = offset;
+    }
+
+    Context.prototype.lineJoin = function(join) {
+        if (this._dummy) return;
+        if (join === undefined)
+            return this._ctx.lineJoin;
+        this._ctx.lineJoin = join;
+    }
+
+    Context.prototype.lineWidth = function(pen) {
+        if (this._dummy) return;
+        if (pen === undefined)
+            return this._ctx.lineWidth;
+
+        this._ctx.lineWidth = pen;
+    }
+
+    Context.prototype.miterLimit = function(val) {
+        if (this._dummy) return;
+        if (val === undefined)
+            return this._ctx.miterLimit;
+
+        this._ctx.miterLimit = val;
+    }
+
+    Context.prototype.shadowBlur = function(val) {
+        if (this._dummy) return;
+        if (val === undefined)
+            return this._ctx.shadowBlur;
+
+        this._ctx.shadowBlur = val;
+    }
+
+    Context.prototype.shadowColor = function(str) {
+        if (this._dummy) return;
+        if (str === undefined)
+            return this._ctx.shadowColor;
+
+        this._ctx.shadowColor = str;
+    }
+
+    Context.prototype.shadowOffsetX = function(val) {
+        if (this._dummy) return;
+        if (val === undefined)
+            return this._ctx.shadowOffsetX;
+
+        this._ctx.shadowOffsetX = val;
+    }
+
+    Context.prototype.shadowOffsetY = function(val) {
+        if (this._dummy) return;
+        if (val === undefined)
+            return this._ctx.shadowOffsetY;
+
+        this._ctx.shadowOffsetY = val;
+    }
+
+    Context.prototype.strokeStyle = function(colour) {
+        if (this._dummy) return;
+        if (colour === undefined)
+            return ctx.strokeStyle;
+
+        if (colour === null)
+            this._ctx.strokeStyle = '#000000'
+        else if (colour instanceof cute.Colour)
+            this._ctx.strokeStyle = colour.css();
+        else
+            this._ctx.strokeStyle = colour;
+    }
+
+    Context.prototype.textAlign = function(str) {
+        if (this._dummy) return;
+        if (str === undefined)
+            return this._ctx.textAlign;
+
+        this._ctx.textAlign = str;
+    }
+
+    Context.prototype.textBaseline = function(base) {
+        if (this._dummy) return;
+        if (base === undefined)
+            return this._ctx.textBaseline;
+
+        this._ctx.textBaseline = base;
+    }
+
+
+    /*------------------------------------------------------------
+     *  Extra's
+     *------------------------------------------------------------*/
+
+    Context.prototype.text = function(str, x, y, base) {
+        if (this._dummy) return;
+        this._ctx.textBaseline = base || 'alphabetic';
+        this._ctx.fillText(str, x, y);
+    }
+
+
+    /**
+     *  Rounded corner triangle using arcTo.
+     *
+     *  @author http://www.dbp-consulting.com/tutorials/canvas/CanvasArcTo.html
+     */
+    Context.prototype.roundedRect = function(x, y, w, h, r, fill, stroke) {
+        if (this._dummy) return;
+        this._ctx.save(); // save the context so we don't mess up others
+        this._ctx.beginPath(); // draw top and top right corner
+        this._ctx.moveTo(x+r,y);
+        this._ctx.arcTo(x+w,y,x+w,y+r,r);
+        // draw right side and bottom right corner
+        this._ctx.arcTo(x+w,y+h,x+w-r,y+h,r); // draw bottom and bottom left corner
+        this._ctx.arcTo(x,y+h,x,y+h-r,r); // draw left and top left corner
+        this._ctx.arcTo(x,y,x+r,y,r);
+        if (fill)
+            this._ctx.fill();
+        if (stroke)
+            this._ctx.stroke();
+        this._ctx.restore();
+    }
+
+    Context.prototype.circle = function(x, y, radius) {
+        if (this._dummy) return;
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+        this._ctx.closePath();
+        this._ctx.fill();
+        this._ctx.stroke();
+    }
+
+    Context.prototype.fillCircle = function(x, y, radius) {
+        if (this._dummy) return;
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+        this._ctx.closePath();
+        this._ctx.fill();
+    }
+
+    Context.prototype.strokeCircle = function(x, y, radius) {
+        if (this._dummy) return;
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+        this._ctx.closePath();
+        this._ctx.stroke();
+    }
+
+
+    /*------------------------------------------------------------
+     *  Ellipse
+     *------------------------------------------------------------*/
+
+    Context.prototype.ellipse = function(x, y, w, h) {
+        if (this._dummy) return;
+        this.drawEllipse(x, y, w, h, true, true);
+    }
+
+    Context.prototype.strokeEllipse = function(x, y, w, h) {
+        if (this._dummy) return;
+        this.drawEllipse(x, y, w, h, false, true);
+    }
+
+    Context.prototype.fillEllipse = function(x, y, w, h) {
+        if (this._dummy) return;
+        this.fillEllipse(x, y, w, h, true, false);
+    }
+
+    Context.prototype.drawEllipse = function(x, y, w, h, fill, stroke) {
+        if (this._dummy) return;
+        var kappa = 0.5522848;
+        var ox, oy, xe, ye, xm, ym;
+
+        ox = (w / 2) * kappa, // control point offset horizontal
+        oy = (h / 2) * kappa, // control point offset vertical
+        xe = x + w, // x-end
+        ye = y + h, // y-end
+        xm = x + w / 2, // x-middle
+        ym = y + h / 2; // y-middle
+
+        this._ctx.beginPath();
+        this._ctx.moveTo(x, ym);
+        this._ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+        this._ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+        this._ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+        this._ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+        this._ctx.closePath();
+        if (fill)
+            this._ctx.fill();
+        if (stroke)
+            this._ctx.stroke();
+    }
+
+    Context.prototype.strokeArc = function(x, y, radius, start, end, counter) {
+        if (this._dummy) return;
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, radius, start, end, (counter === undefined ? true : counter));
+        this._ctx.closePath();
+        this._ctx.stroke();
+    }
+
+    Context.prototype.fillArc = function(x, y, radius, start, end, counter) {
+        if (this._dummy) return;
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, radius, start, end, (counter === undefined ? true : counter));
+        this._ctx.closePath();
+        this._ctx.fill();
+    }
+
+    Context.prototype.style = function(style) {
+        var ctx = this;
+
+        if (ctx._dummy) return;
+
+        if (style.stroke)
+            ctx.strokeStyle(style.stroke);
+        if (style.fill)
+            ctx.fillStyle(style.fill);
+        if (style.line_dash)
+            ctx.setLineDash(style.line_dash);
+
+        return;
+    }
+
+    Context.prototype.line = function(x1, y1, x2, y2) {
+        var c = ', ';
+        if (this._dummy) return;
+
+        this._ctx.beginPath();
+
+        if (this._plane) {
+            var pl = this._plane;
+            var xy1 = pl.txy(x1, y1);
+            var xy2 = pl.txy(x2, y2);
+
+            x1 = xy1.x;
+            y1 = xy1.y;
+            x2 = xy2.x;
+            y2 = xy2.y;
+            if (this._drawable)
+                this.add_line(xy.x, xy.y);
+        } else {
+            x1 = Math.round(x1);
+            y1 = Math.round(y1);
+            x2 = Math.round(x2);
+            y2 = Math.round(y2);
+        }
+
+    //  this._ctx.lineCap = 'square';
+        this.lineCap('butt');
+        if (this._ctx.lineWidth === 1) {
+            this._ctx.moveTo(x1-0.5, y1-0.5);
+            this._ctx.lineTo(x2-0.5, y2-0.5);
+        } else {
+            this._ctx.moveTo(x1, y1);
+            this._ctx.lineTo(x2, y2);
+        }
+        this._ctx.closePath();
+        this._ctx.stroke();
+    }
+
+    Context.prototype.fillPolygon = function(a) {
+        if (this._dummy) return;
+        var x = 0, y = 1;
+
+        this._ctx.beginPath();
+        this._ctx.moveTo(a[x], a[y]);
+        for (x=2, y=3; x<a.length; x+=2, y+=2)
+            this._ctx.lineTo(a[x], a[y]);
+        this._ctx.closePath();
+        this._ctx.fill();
+    }
+
+    Context.prototype.path = function(points, ox, oy, closed, fill) {
+        if (this._dummy) return;
+        if (points.length < 2)
+            return;
+
+        var x0 = 0, y0 = 0;
+
+        this._ctx.beginPath();
+        for (i=0; i<points.length; i++) {
+            var x = points[i]._x + ox;
+            var y = points[i]._y + oy;
+
+            if (i === 0) {
+                this._ctx.moveTo(x, y);
+                x0 = x, y0 = y;
+            } else {
+                this._ctx.lineTo(x, y);
+            }
+        }
+        if (closed) {
+            this._ctx.lineTo(x0, y0);
+        }
+        this._ctx.closePath();
+        if (this._ctx.lineWidth > 0) {
+            this._ctx.stroke();
+        }
+        if (fill) {
+            this._ctx.fillStyle(fill);
+            this._ctx.fill();
+        }
+    }
+
+
+/*
+    function new_radial_gradient(this._ctx. x0, y0, r0, x1, y1, r1, stops) {
+        var grd;
+
+        grd = this._ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+        for (var i=0; i<stops.length; i++) {
+            grd.addColorStop(stops[i].value, stops[i].color);
+        }
+
+        return grd;
+    }
+
+    function r_radial_gradient(this._ctx. x0, y0, r0, x1, y1, r1, stops) {
+        var grd;
+
+        grd = this._ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+        for (var i=0; i<stops.length; i++) {
+            grd.addColorStop(stops[i].value, stops[i].color);
+        }
+
+        this._ctx.fillStyle(grd);
+        this._ctx.beginPath();
+        this._ctx.arc(x0, y0, Math.max(r0,r1), 0, 2 * Math.PI, true);
+        this._ctx.fill();
+    }
+
+    function r_radial_box(this._ctx. x0, y0, r0, x1, y1, r1, stops) {
+        var grd;
+
+        grd = this._ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+        for (var i=0; i<stops.length; i++) {
+            grd.addColorStop(stops[i].value, stops[i].color);
+        }
+        this._ctx.fillStyle(grd);
+        this._ctx.beginPath();
+        this._ctx.rect(x0, y0, r0, r1);
+        this._ctx.fill();
+    }
+*/
+
+    Context.prototype.gradientBox = function(x, y, w, h, stops) {
+        if (this._dummy) return;
+        var grd;
+
+        grd = this._ctx.createLinearGradient(x, y, x, y+h);
+        for (var i=0; i<stops.length; i++) {
+            grd.addColorStop(stops[i].value, stops[i].color);
+        }
+        this._ctx.fillStyle(grd);
+        this._ctx.beginPath();
+        this._ctx.rect(x, y, w, h);
+        this._ctx.fill();
+    }
+
+}).call(this);

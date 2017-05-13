@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+@import "golabColors";
+
+@pleaseWaitIconSize: 115px;
+.pleaseWaitIcon {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: @pleaseWaitIconSize;
+  height: @pleaseWaitIconSize;
+  margin-top: -@pleaseWaitIconSize/2; /* half the height */
+  margin-left: -@pleaseWaitIconSize/2; /* half the width */
+  background: url("../images/loading-animation.gif") center no-repeat;
+  background-size: @pleaseWaitIconSize;
+}

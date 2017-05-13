@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %> | SemanticPM </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render 'layouts/header' %>
+
+
+  <div class="ui centered grid">
+    <div class="fourteen wide column">
+      <div class="ui segment">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "ui #{message_type} message") %>
+        <% end %>
+        <%= yield %>
+        <%= debug(params) if Rails.env.development? %>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

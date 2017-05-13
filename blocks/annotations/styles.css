@@ -1,0 +1,141 @@
+@CHARSET "UTF-8";
+.hashtaginput {
+	widht: 80%;
+}
+
+.block_annotatons .annotation_tab_rtl {
+	padding-left: 1px;  
+	padding-right: 1px;  
+	padding-bottom: 0px;  
+	text-align: right;  
+	letter-spacing: 2px;  
+	text-decoration: none;  
+	line-height: normal;
+
+	
+}
+.anot-view-area-div {
+	 margin-left: 0px; 
+	 padding-left: 0px;
+	
+}
+
+#anot-view-comment{
+	 margin-left: 25px; 
+	 margin-top: -200px; 
+	 padding-left: 10px;
+	 padding-right: 10px;
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+	 position: absolute;
+	 top: 20px;
+	 left: 450px;
+	 width: 700px;
+	 height:500px;
+	 border: 3px dashed #b3b3b3;
+	 overflow: scroll;
+	 background-color: white;
+}
+
+#anot_view_graph{
+	 margin-left: 25px; 
+	 margin-top: -200px; 
+	 padding-left: 10px;
+	 padding-right: 10px;
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+	 position: absolute;
+	 top: 20px;
+	 left: 450px;
+	 width: 820px;
+	 height:300px;
+	 border: 3px dashed #b3b3b3;
+	 overflow: scroll;
+	 background-color: white;
+	 z-index:700;
+}
+
+.anot_header_styles {
+	text-align:left;
+}
+#anot_open_start {
+	 margin-left: 0px; 
+	 padding-left: 0px;
+	
+}
+.anot_open {
+	display: block;
+	font-size:12px;
+	}
+.anot_closed {
+	display: none;
+}
+	
+.anot_open ul {
+	 margin-left: 0.3em; 
+	 padding-left: 0.3em;
+}
+.anot_open li {
+	list-style-type: none;
+	padding-top: .2em;
+	padding-bottom: .2em;
+	margin-left: 0.3em; 
+	padding-left: 0.3em;
+	font-size: 14px;
+	}
+        
+.anot_open li img {
+	vertical-align: middle;
+}
+
+.anot_comment_tab {
+	font-size:12px;
+}
+
+.anot_graph_tab {
+	font-size:12px;
+}
+
+.anot_open_name {
+	font-size:10px;
+}
+.anot_open_name a{
+	text-decoration:none;
+	color:#000000;
+}
+
+.anot_open_name a:hover{
+	font-style: italic;
+	color:#000000;
+}
+
+#text_annotation{
+	word-break: keep-all;
+}
+
+.anot_view_ddbx optgroup{
+	background:grey;
+	color:#fff;
+	font-style:normal;
+	font-weight:normal;
+}
+
+.anot_view_ddbx option{
+	background:#ffffff;
+	color:#000;
+	font-style:normal;
+	font-weight:normal;
+}
+
+#statistic_info{
+	
+	font-size:8px;
+}
+
+.ui-autocomplete {
+	position: absolute;
+	z-index: 900 !important;
+	cursor:pointer; 
+    height:150px; 
+    overflow-y:scroll;	
+}

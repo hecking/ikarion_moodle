@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="testing head.js, font awesome, twitter bootstrap..."
+            author="Lars Bollen"
+            author_email="l.bollen@utwente.nl"
+            >
+        <Require feature="osapi"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html"><![CDATA[
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>testing head.js, font awesome, twitter bootstrap...</title>
+        </head>
+        <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+            </div>
+
+            <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+            <div class="row">
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                <div id="ut_test_icon" class="col-xs-6 col-md-4">some fancy FA icon</div>
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+            </div>
+
+            <!-- Columns are always 50% wide, on mobile and desktop -->
+            <div class="row">
+                <div class="col-xs-6">.col-xs-6</div>
+                <div class="col-xs-6">.col-xs-6</div>
+            </div>
+        </div>
+
+        <script type="text/javascript" charset="utf-8" src="../../../libs/js/head.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+        <script type="text/javascript">
+            function init() {
+                console.log("initializing test widget.");
+                ut.test.main();
+            }
+
+            if (typeof gadgets === "undefined") {
+                window.onload = function () {
+                    init();
+                }
+            } else {
+                gadgets.util.registerOnLoadHandler(init);
+            }
+        </script>
+        </body>
+        </html>
+    ]]></Content>
+</Module>

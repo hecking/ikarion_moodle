@@ -1,0 +1,54 @@
+/*  Use with gcc -E -x c -P -C *.h > *.js 
+ */
+"use strict";
+
+(function() {
+    var cute = this.cute;
+
+    var pl1 = new cute.Plane({
+        size: new cute.Size(200,150),
+        origin: new cute.Point(100,75),
+        scale: new cute.Point(1,1),
+        rotate: geo.radians(0)
+    });
+    var pl2 = new cute.Plane({
+        size: new cute.Size(200,150),
+        origin: new cute.Point(100,75),
+        scale: new cute.Point(1,1),
+        rotate: geo.radians(0)
+    });
+    var canvas = new cute.Canvas('canvas');
+    var tri = new cute.Triangle();
+    var bowl = new cute.Bowl();
+    var tube1 = new cute.Tube(0, 0, 40, 100);
+    var tube2 = new cute.Tube(0, 0, 40, 100);
+    var cross1 = new cute.Cross(0, 0, 20, 20);
+    var cross2 = new cute.Cross(0, 0, 20, 20);
+
+//    canvas.display(pl1, new cute.Point(100,100));
+    canvas.display(pl2, new cute.Point(100,100));
+//    canvas.display(new cute.Box(200,150), new cute.Point(100,100));
+//    canvas.display(new cute.Box(200,150), new cute.Point(300,100));
+
+//    pl.display(tri, new cute.Point(0,0));
+//    pl.display(bowl, new cute.Point(0,0));
+//    pl1.display(tube1, new cute.Point(0,0));
+//    pl1.display(cross1, new cute.Point(0,0));
+    pl2.display(tube2, new cute.Point(0,0));
+    { if (typeof(console) === 'undefined') { if (typeof(navigator) === 'undefined') print(' after pl2.display tube2'); } else console.log(' after pl2.display tube2'); };
+//    pl2.display(cross2, new cute.Point(0,0));
+
+    canvas.render();
+
+/*
+    var angle = 0;
+    var timer = setInterval(function() {
+        pl2.rotate(geo.radians(angle));
+        canvas.render({clear: true});
+        angle += 1;
+        if (timer && angle > 360)
+            clearInterval(timer);
+    }, 1000/60);
+*/
+
+}).call(this);

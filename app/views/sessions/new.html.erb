@@ -1,0 +1,25 @@
+<% provide(:title, "Login")  %>
+<h1>Login</h1>
+<div class="ui form">
+  <%= form_for(:session, url: login_path) do |f| %>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :remember_me, class: "ui checkbox" do %>
+        <%= f.check_box :remember_me %>
+        <label>Remember me on this computer</label>
+      <% end %>
+    </div>
+
+    <%= f.submit "Login", class: "ui button" %>
+  <% end %>
+
+</div>

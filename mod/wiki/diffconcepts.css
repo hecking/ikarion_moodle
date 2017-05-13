@@ -1,0 +1,32 @@
+.links line {
+
+    stroke-width: 1.5px;
+}
+
+
+text {
+    font: 12px sans-serif;
+    pointer-events: none;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+#panel, #flip {
+    width: 1190px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(178, 184, 178, 0.18);
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    width: 1100px;
+    padding: 50px;
+    display: none;
+}

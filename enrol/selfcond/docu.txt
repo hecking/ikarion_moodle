@@ -1,0 +1,21 @@
+
+ 1 ## General description ##
+
+ 2 ## After installation ##
+
+ 1) Einschreibe-Methode bekannt machen
+ Update table: mdl_config
+ id:5 name:enrol_plugins_enabled value: manual, guest, self, cohort
+
+ 2) Plugin aktivieren
+ Use the admin-panel to activate enrol_selfcond plugin
+ Website-Admin-->Plugins-->Enrolment->Overview
+
+ 3) Modifiziere Spalte Standard-Rollen
+ Modify column type mdl_enrol 'roleid' from bigint to varchar
+
+ 3) Neue Instanz
+ Insert a new enrolment method table: mdl_enrol
+ enrol: selfcond, roleid: {groupids}
+
+ 3 ## Developer notes ##

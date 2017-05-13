@@ -1,0 +1,45 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/js/commonsModules.js" />
+        <item url="file://$PROJECT_DIR$/js/createEnvironmentHandlers_local_testing.js" />
+        <item url="file://$PROJECT_DIR$/js/createEnvironmentHandlers.js" />
+        <item url="file://$PROJECT_DIR$/js/StorageHandler.js" />
+        <item url="file://$PROJECT_DIR$/js/MetadataUtils.js" />
+        <item url="file://$PROJECT_DIR$/js/ActionLogger.js" />
+        <item url="file://$PROJECT_DIR$/js/logStressTest.js" />
+        <item url="file://$PROJECT_DIR$/js/MetadataHandler.js" />
+        <item url="file://$PROJECT_DIR$/js/dataSource.js" />
+        <item url="file://$PROJECT_DIR$/js/logTest.js" />
+        <item url="file://$PROJECT_DIR$/js/logTestExtended.js" />
+        <item url="file://$PROJECT_DIR$/js/languageHandlers.js" />
+        <item url="file://$PROJECT_DIR$/js/angular/goLabUtils.js" />
+        <item url="file://$PROJECT_DIR$/js/angular/dragAndDrop.js" />
+        <item url="file://$PROJECT_DIR$/js/resourceEventEmitterModel.js" />
+        <item url="file://$PROJECT_DIR$/js/resourceLoader.js" />
+        <item url="file://$PROJECT_DIR$/js/angular/resourceIOUI.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/js/createEnvironmentHandlers_local_testing.js" />
+      <root url="file://$PROJECT_DIR$/js/commonsModules.js" />
+      <root url="file://$PROJECT_DIR$/js/createEnvironmentHandlers.js" />
+      <root url="file://$PROJECT_DIR$/js/StorageHandler.js" />
+      <root url="file://$PROJECT_DIR$/js/MetadataUtils.js" />
+      <root url="file://$PROJECT_DIR$/js/ActionLogger.js" />
+      <root url="file://$PROJECT_DIR$/js/logStressTest.js" />
+      <root url="file://$PROJECT_DIR$/js/MetadataHandler.js" />
+      <root url="file://$PROJECT_DIR$/js/dataSource.js" />
+      <root url="file://$PROJECT_DIR$/js/logTest.js" />
+      <root url="file://$PROJECT_DIR$/js/logTestExtended.js" />
+      <root url="file://$PROJECT_DIR$/js/languageHandlers.js" />
+      <root url="file://$PROJECT_DIR$/js/angular/goLabUtils.js" />
+      <root url="file://$PROJECT_DIR$/js/resourceEventEmitterModel.js" />
+      <root url="file://$PROJECT_DIR$/js/angular/dragAndDrop.js" />
+      <root url="file://$PROJECT_DIR$/js/angular/resourceIOUI.js" />
+      <root url="file://$PROJECT_DIR$/js/resourceLoader.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

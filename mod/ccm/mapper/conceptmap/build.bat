@@ -1,0 +1,6 @@
+@echo off
+echo Building concept mapper....
+echo compiling main coffeescript sources...
+call ..\build\compileAllCoffee src\main\webapp\coffee
+echo compiling less sources
+call ..\build\compileAllLess src\main\webapp\css\

@@ -1,0 +1,22 @@
+<messagebundle>
+    <msg name="ut_tools_conceptmapper_yes">Yes</msg>
+    <msg name="ut_tools_conceptmapper_no">No</msg>
+    <msg name="ut_tools_conceptmapper_cancel">Cancel</msg>
+    <msg name="ut_tools_conceptmapper_save">Save</msg>
+    <msg name="ut_tools_conceptmapper_load">Load</msg>
+    <msg name="ut_tools_conceptmapper_name">Name</msg>
+    <msg name="ut_tools_conceptmapper_delete">Delete concept.</msg>
+    <msg name="ut_tools_conceptmapper_toolbar_title">Toolbar</msg>
+    <msg name="ut_tools_conceptmapper_map_title">Concept Map</msg>
+    <msg name="ut_tools_conceptmapper_concept_template_text">concept</msg>
+    <msg name="ut_tools_conceptmapper_concept_template_selector">select or type</msg>
+    <msg name="ut_tools_conceptmapper_concept_template_tooltip">Drag me to the concept map.</msg>
+    <msg name="ut_tools_conceptmapper_linkButton">Activate to create/delete relations.</msg>
+    <msg name="ut_tools_conceptmapper_trashcan">Drag a concept to delete or click to delete all.</msg>
+    <msg name="ut_tools_conceptmapper_load_long">Load a concept map.</msg>
+    <msg name="ut_tools_conceptmapper_load_question">Which concept map do you want to load?</msg>
+    <msg name="ut_tools_conceptmapper_save_long">Save current concept map.</msg>
+    <msg name="ut_tools_conceptmapper_save_question">What is the name of your concept map?</msg>
+    <msg name="ut_tools_conceptmapper_trash_title">Remove everything?</msg>
+    <msg name="ut_tools_conceptmapper_trash_question">Do you really want to delete all concepts and relations?</msg>
+</messagebundle>

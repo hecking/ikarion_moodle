@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/journal/db" VERSION="20120320" COMMENT="XMLDB file for Moodle mod/journal"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="ccm" COMMENT="Data for each ccm module" NEXT="conceptmaps">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="ccmmid"/>
+        <FIELD NAME="ccmid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="ccmmid" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="course" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="name" NEXT="timeclose"/>
+        <FIELD NAME="timeclose" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timemodified"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="ccm_conceptmaps" COMMENT="All conceptmaps for the modules" PREVIOUS="ccm">
+      <FIELDS>
+          <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="gid"/>
+          <FIELD NAME="gid" TYPE="char" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="id" NEXT="cid"/>
+          <FIELD NAME="cid" TYPE="char" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="gid" NEXT="skey"/>
+          <FIELD NAME="skey" TYPE="char" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="cid" NEXT="map"/>
+          <FIELD NAME="map" TYPE="binary" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="mid" NEXT="comment"/>
+          <FIELD NAME="comment" TYPE="text" DEFAULT="There are no comments available yet." SEQUENCE="false" NOTNULL="false" PREVIOUS="map"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <!--<KEY NAME="umap" FIELDS="cid" />
+        <KEY NAME="cid" TYPE="foreign" FIELDS="cid" REFTABLE="ccm" REFFIELDS="id" PREVIOUS="primary"/> -->
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="ccm_actions" COMMENT="All user actions" PREVIOUS="ccm">
+      <FIELDS>
+          <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="gid"/>
+          <FIELD NAME="gid" TYPE="char" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="id" NEXT="cid"/>
+          <FIELD NAME="cid" TYPE="char" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="gid" NEXT="action"/>
+          <FIELD NAME="action" TYPE="binary" LENGTH="255" SEQUENCE="false"  NOTNULL="false" PREVIOUS="cid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <!--<KEY NAME="umap" FIELDS="cid" />
+        <KEY NAME="cid" TYPE="foreign" FIELDS="cid" REFTABLE="ccm" REFFIELDS="id" PREVIOUS="primary"/> -->
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
+
+<!--
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" UNSIGNED="true"  SEQUENCE="true" NOTNULL="true" NEXT="mid"/>
+        <FIELD NAME="mid" TYPE="char" LENGTH="255" SEQUENCE="false"  NOTNULL="true" PREVIOUS="id"  NEXT="ccmid"/>
+        <FIELD NAME="ccmid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="mid" NEXT="map"/>
+        <FIELD NAME="map" TYPE="binary" SEQUENCE="false" NOTNULL="false" PREVIOUS="ccmid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="ccmid" TYPE="foreign" FIELDS="ccmid" REFTABLE="ccm" REFFIELDS="id" PREVIOUS="primary"/>
+      </KEYS>
+-->

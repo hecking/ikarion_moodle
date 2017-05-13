@@ -1,0 +1,86 @@
+/*  $Id$	-*- mode: javascript -*-
+ *  
+ *  File	link.src
+ *  Part of	Cute
+ *  Author	Anjo Anjewierden, a.a.anjewierden@utwente.nl
+ *  Purpose	Definition of class Link
+ *  Works with	SWI-Prolog (www.swi-prolog.org)
+ *  
+ *  Notice	Copyright (c) 2012  University of Twente
+ *  
+ *  History	12/07/12  (Created)
+ *  		12/07/12  (Last modified)
+ */ 
+
+
+/*------------------------------------------------------------
+ *  Class Link
+ *------------------------------------------------------------*/
+
+#include "../h/js.h"
+
+"use strict";
+
+(function() {
+    var cute = this.cute;
+
+    var Link = cute.Link = function(from, to, link, line, func) {
+        var l = this;
+
+        if (!from)
+            from = "link";
+        l._from = from;
+        l._to = to || from;
+        l._line = line || new cute.Line();
+        l._connection_constructor = func;
+
+        return l;
+    }
+
+    Link.prototype.toString = function() {
+        var l = this;
+        var c = ", ";
+
+        return "link(" + l._from + c + l._to + c + l._link + ")";
+    }
+
+
+    /*   Returns a new connection based on the link.
+     */
+    Link.prototype.connection = function(gr, gr2, from, to) {
+        return l._connection_constructor(gr, gr2, this, from, to);
+    }
+
+
+    Link.prototype.from = function(gr) {
+        if (gr) {
+            this._from = gr;
+            return this;
+        }
+        return this._from;
+    }
+
+    Link.prototype.to = function(gr) {
+        if (gr) {
+            this._to = gr;
+            return this;
+        }
+        return this._to;
+    }
+
+    Link.prototype.line = function(ln) {
+        if (ln) {
+            this._line = ln;
+            return this;
+        }
+        return this._line;
+    }
+
+    Link.prototype.connection_constructor = function(f) {
+        if (f) {
+            this._connection_constructor = f;
+            return this;
+        }
+        return this._connection_constructor;
+    }
+}).call(this);

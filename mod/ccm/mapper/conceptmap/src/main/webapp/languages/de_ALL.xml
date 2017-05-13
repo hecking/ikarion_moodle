@@ -1,0 +1,22 @@
+<messagebundle>
+    <msg name="ut_tools_conceptmapper_yes">Ja</msg>
+    <msg name="ut_tools_conceptmapper_no">Nein</msg>
+    <msg name="ut_tools_conceptmapper_cancel">Abbruch</msg>
+    <msg name="ut_tools_conceptmapper_save">Speichern</msg>
+    <msg name="ut_tools_conceptmapper_load">Laden</msg>
+    <msg name="ut_tools_conceptmapper_name">Name</msg>
+    <msg name="ut_tools_conceptmapper_delete">Konzept löschen.</msg>
+    <msg name="ut_tools_conceptmapper_toolbar_title">Toolbar</msg>
+    <msg name="ut_tools_conceptmapper_map_title">Concept Map</msg>
+    <msg name="ut_tools_conceptmapper_concept_template_text">Konzept</msg>
+    <msg name="ut_tools_conceptmapper_concept_template_selector">Konzept wählen</msg>
+    <msg name="ut_tools_conceptmapper_concept_template_tooltip">Ziehe mich auf die Concept Map.</msg>
+    <msg name="ut_tools_conceptmapper_linkButton">Aktiviere den Kanten-Modus um Verbindungen zu ziehen oder zu löschen.</msg>
+    <msg name="ut_tools_conceptmapper_trashcan">Ziehe ein Konzept hierher zum löschen oder klicke um alles zu löschen.</msg>
+    <msg name="ut_tools_conceptmapper_load_long">Concept Map laden.</msg>
+    <msg name="ut_tools_conceptmapper_load_question">Welche Concept Map soll geladen werden?</msg>
+    <msg name="ut_tools_conceptmapper_save_long">Concept Map speichern.</msg>
+    <msg name="ut_tools_conceptmapper_save_question">Was ist der Name der Concept Map?</msg>
+    <msg name="ut_tools_conceptmapper_trash_title">Alles löschen?</msg>
+    <msg name="ut_tools_conceptmapper_trash_question">Möchtest du wirklich alle Konzepte löschen?</msg>
+</messagebundle>

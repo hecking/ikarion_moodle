@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="internationalisation test"
+            author="Lars Bollen"
+            author_email="l.bollen@utwente.nl"
+            preferred_height="500"
+            preferred_width="500"
+            >
+        <Require feature="osapi"/>
+        <Require feature="dynamic-height"/>
+        <Locale messages="ALL_ALL.xml"/>
+        <Locale lang="fr" messages="fr_ALL.xml"/>
+        <Locale lang="de" messages="de_ALL.xml"/>
+    </ModulePrefs>
+
+    <Content type="html"><![CDATA[
+
+        <div id="content"></div>
+
+        <script type="text/javascript">
+            function init() {
+                var div = document.getElementById('content');
+                var prefs = new gadgets.Prefs();
+                console.log(prefs.getLang());
+                var html = "<h1>";
+                html += prefs.getMsg("one")+"<br>";
+                html += prefs.getMsg("two")+"<br>";
+                html += prefs.getMsg("three")+"<br>";
+                html +=  "</h1>";
+                div.innerHTML = html;
+            }
+
+            gadgets.util.registerOnLoadHandler(init);
+
+        </script>
+
+        ]]></Content>
+
+</Module>

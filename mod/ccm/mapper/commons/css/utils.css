@@ -1,0 +1,23 @@
+@charset "utf-8";
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.textSelectable {
+  -moz-user-select: -moz-text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
+/* this works on iOS, not on android */
+.preventLongPress {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}

@@ -1,0 +1,125 @@
+﻿@charset "utf-8";
+
+@import "golabColors";
+@import "utils";
+
+@secondaryBorder: 1px solid @secondaryColor;
+
+/* Component containers
+----------------------------------*/
+.ui-widget {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.1em;
+}
+
+/*.ui-widget .ui-widget {*/
+/*font-size: 1.1em;*/
+/*}*/
+
+/*.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {*/
+/*font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;*/
+/*font-size: 1em;*/
+/*}*/
+
+.ui-widget-content {
+  border: @secondaryBorder;
+  /*background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;*/
+  background: @golabWhite;
+  color: @tertiaryColorText;
+}
+
+/*.ui-widget-content a {*/
+/*color: #333333;*/
+/*}*/
+
+.ui-widget-header {
+  border: @secondaryBorder;
+  /*background: #f6a828 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;*/
+  background: @primaryColorLight;
+  color: @golabWhite;
+  font-weight: bold;
+}
+
+.ui-widget-header a {
+  color: @golabWhite;
+}
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  border: 1px solid @secondaryBorder;
+  /*background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;*/
+  background: @primaryColorLight;
+  font-weight: bold;
+  /*color: #fff;*/
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+  color: @golabTextColor;
+  text-decoration: none;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+  border: @secondaryBorder;
+  /*background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;*/
+  background: @primaryColor;
+  font-weight: bold;
+  color: @golabWhite;
+}
+
+.ui-state-hover a, .ui-state-hover a:hover {
+  color: @golabWhite;
+  text-decoration: none;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+  border: @secondaryBorder;
+  /*background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;*/
+  background: @secondaryColor;
+  font-weight: bold;
+  color: @tertiaryColorText;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+  color: @tertiaryColorText;
+  text-decoration: none;
+}
+
+.ui-widget :active {
+  outline: none;
+}
+
+.ui-slider-handle {
+  .preventLongPress;
+}
+
+.ui-tabs-nav {
+  background: @tertiaryColorLight;
+}
+
+ul.ui-tabs-nav li.ui-tabs-active {
+  background: @golabWhite;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+  float: left;
+  padding: .25em 1em;
+  text-decoration: none;
+}
+
+.ui-tabs .ui-state-active a {
+  float: left;
+  padding: .25em 1em;
+  text-decoration: none;
+  background: @golabWhite;
+}
+
+.ui-helper-reset {
+  line-height: 1;
+  font-family: @golabFontFamily;
+  font-size: @golabFontSize;
+}
+
+.ui-dialog-titlebar {
+  background: @primaryColor;
+}

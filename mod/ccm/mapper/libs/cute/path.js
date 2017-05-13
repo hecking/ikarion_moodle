@@ -1,0 +1,277 @@
+/*  $Id$	-*- mode: javascript -*-
+ *  
+ *  File	path.src
+ *  Part of	Cute
+ *  Author	Anjo Anjewierden, a.a.anjewierden@utwente.nl
+ *  Purpose	Definition of class Path
+ *  Works with	SWI-Prolog (www.swi-prolog.org)
+ *  
+ *  Notice	Copyright (c) 2012  University of Twente
+ *  
+ *  History	13/07/12  (Created)
+ *  		13/07/12  (Last modified)
+ */
+
+/*------------------------------------------------------------
+ *  Class cute.Path
+ *------------------------------------------------------------*/
+/*  Use with gcc -E -x c -P -C *.h > *.js 
+ */
+
+"use strict";
+
+(function() {
+    var cute = this.cute;
+
+    var Path = cute.Path = function(points) {
+        var p = this;
+
+        cute.Joint.call(p);
+        p._offset = new cute.Point(0,0);
+        p._points = (points || []);
+        p._closed = false;
+        p._mark = null;
+
+        if (points)
+            p.points(points);
+
+        return p;
+    }
+
+    ist.extend(Path, cute.Joint);
+
+    Path.prototype.toString = function() {
+        var p = this;
+        return "cute.Path(" + p._w, + ", " + p._h + ")";
+    }
+
+    Path.prototype.adjust_first_arrow = function() {
+        var p = this;
+
+        if (p._first_arrow) {
+            if (p._points.length >= 2) {
+                var tip = p._points[0];
+                var ref = p._points[1];
+
+                p._first_arrow.points(tip.x + p._offset._x,
+                                      tip.y + p._offset._y,
+                                      ref.x + p._offset._x,
+                                      ref.y + p._offset._y);
+                p._first_arrow.Compute();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    Path.prototype.adjust_second_arrow = function() {
+        var p = this;
+
+        if (p._second_arrow) {
+            if (p._points.length >= 2) {
+                var tip = p._points[p._points.length-1];
+                var ref = p._points[p._points.length-2];
+
+                p._second_arrow.points(tip.x + p._offset._x,
+                                       tip.y + p._offset._y,
+                                       ref.x + p._offset._x,
+                                       ref.y + p._offset._y);
+                p._second_arrow.Compute();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Path.prototype.render_canvas = function(ctx, canvas) {
+        var p = this;
+        var ox, oy;
+
+        ox = p._area._x + p._offset._x;
+        oy = p._area._y + p._offset._y;
+
+        ctx.fillStyle(p._colour);
+        ctx.lineWidth(p._pen);
+        ctx.path(p._points, ox, oy, p._closed, p._fill_pattern);
+
+        // TBD -- mark
+
+        if (p.adjust_first_arrow())
+            p._first_arrow.render_canvas(ctx, canvas);
+        if (p.adjust_second_arrow())
+            p._second_arrow.render_canvas(ctx, canvas);
+
+        return this;
+    }
+
+
+    Path.prototype.append = function(pt) {
+        this._points.push(pt);
+        this.request_compute();
+        return this;
+    }
+
+    Path.prototype.clear = function() {
+        var p = this;
+
+        p._points = [];
+        p.request_compute();
+
+        return p;
+    }
+
+    Path.prototype.points = function(pts) {
+        var p = this;
+        p._points = pts;
+        p.request_compute();
+
+        return p;
+    }
+
+
+    Path.prototype.closed = function(val) {
+        if (val) {
+            if (val != this._closed) {
+                this._closed = val;
+                this.request_compute();
+                return this;
+            }
+            return this;
+        }
+        return this._closed;
+    }
+
+
+    Path.prototype.mark = function(img) {
+        if (img) {
+            if (img != this._mark) {
+                this._mark = img;
+                this.request_compute();
+                return this;
+            }
+            return this;
+        }
+        return this._mark;
+    }
+
+
+    Path.prototype.compute = function() {
+        var p = this;
+
+        if (p._request_compute) {
+            p.compute_bounding_box();
+            cute.Graphical.prototype.changed_area(p);
+            p._request_compute = false;
+        }
+        return p;
+    }
+
+
+    Path.prototype.compute_bounding_box = function() {
+        var p = this;
+        var points = p._points;
+        var minx = 1000000, miny = 1000000, maxx = -1000000, maxy = -10000000;
+
+        for (var i=0; i<points.length; i++) {
+            var pt = points[i];
+            var px = pt._x;
+            var py = pt._y;
+
+            if (px < minx) minx = px;
+            if (px > maxx) maxx = px;
+            if (py < miny) miny = py;
+            if (py > maxy) maxy = py;
+        }
+
+        if (p._mark || p._selected === true) {
+            var mw = 0;
+            var mh = 0;
+
+            if (p._mark) {
+                mw = p._mark._size._w;
+                mh = p._mark._size._h;
+            }
+            if (p._selected === true) { /* selection bubbles */
+                mw = Math.max(mw, 5);
+                mh = Math.max(mh, 5);
+            }
+
+            minx -= (mw+1)/2;
+            maxx += (mw+1)/2;
+            miny -= (mh+1)/2;
+            maxy += (mh+1)/2;
+        }
+
+        if (maxx >= minx && maxy >= miny) {
+            var pens = p._pen / 2;
+            var pena = p._pen % 2 == 0 ? pens : pens + 1;
+
+            minx -= pens; maxx += pena;
+            miny -= pens; maxy += pena;
+
+            p._area._x = minx + p._offset._x;
+            p._area._y = miny + p._offset._y;
+            p._area._w = maxx - minx;
+            p._area._h = maxy - miny;
+        } else
+            p._area.clear();
+
+        if (p.adjust_first_arrow())
+            p._area.union_normalised(p._first_arrow._area);
+        if (p.adjust_second_arrow())
+            p._area.union_normalised(p._second_arrow._area);
+
+        return this;
+    }
+
+
+    Path.prototype.geometry = function(x, y, w, h) {
+        var p = this;
+        var a = p._area;
+        var ox, ax, offx, ooffx;
+        var oy, ay, offy, ooffy;
+        var ow, oh;
+        var xf, yf;
+
+        cute.Graphical.prototype.Compute.call(p);
+        ox = a._x;
+        oy = a._y;
+        ow = a._w;
+        oh = a._h;
+
+        // CHANGING_GRAPHICAL
+        if (ow == 0 || oh == 0) {
+            a.set(x, y, ow, oh);
+            if (ox !== a._x || oy !== a._y || ow !== a._w || oh !== a._h)
+              p.changed_area(ox, oy, ow, oh);
+            return p;
+        }
+
+        a.set(x, y, w, h);
+        ax = a._x;
+        ay = a._y;
+        ooffx = p._offset._x;
+        ooffy = p._offset._y;
+        offx = ooffx + ax - ox;
+        offy = ooffy + ay - oy;
+        xf = a._w / ow;
+        yf = a._h / oh;
+
+        p._offset._x = offx;
+        p._offset._y = offy;
+
+        for (var i=0; i<p._points.length; i++) {
+            var pt = p._points[i];
+            var nx = ax + ((pt._x-ox+ooffx) * xf) - offx;
+            var ny = ay + ((pt._y-oy+ooffy) * yf) - offy;
+
+            pt._x = nx;
+            pt._y = ny;
+        }
+        if (ox !== a._x || oy !== a._y || ow !== a._w || oh !== a._h)
+            p.changed_area(ox, oy, ow, oh);
+
+        return this;
+    }
+}).call(this);

@@ -1,0 +1,123 @@
+@charset "utf-8";
+
+@import "golabColors";
+@import "utils";
+
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web'), local('TitilliumWeb-Regular'), url('../../libs/fonts/titilliumWeb400.woff') format('woff');
+}
+
+body, td, th, select, input, textarea {
+  font-family: @golabFontFamily;
+  font-size: @golabFontSize;
+  color: @golabTextColor;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+@workAreaBackgroundColor: @tertiaryColorLight;
+@workAreaBorderColor: @secondaryColor;
+@workAreaBorder: 2px solid @secondaryColor;
+@workAreaBorderRadius: 3px;
+
+.workAreaContainer {
+  background: @workAreaBackgroundColor;
+  border: @workAreaBorder;
+  border-radius: @workAreaBorderRadius;
+}
+
+.workArea {
+}
+
+.toolAreaContainer {
+  background: @workAreaBackgroundColor;
+  border: @workAreaBorder;
+  border-radius: @workAreaBorderRadius;
+}
+
+.toolArea {
+  padding: 5px;
+}
+
+.areaLabel {
+  width: 100%;
+  background: @primaryColor;
+  color: @golabWhite;
+  font-size: @golabFontSize+1;
+  text-align: center;
+  height: 25px;
+}
+
+.activeButton {
+  border: 1px solid @tertiaryColor;
+  border-radius: 2px;
+  background-color: @primaryColorLight;
+  background-size: contain;
+}
+
+.activeButton:hover {
+  background-color: @primaryColor;
+  background-size: contain;
+}
+
+.activeButton:active {
+  background-color: @secondaryColor;
+  background-size: contain;
+}
+
+.pressedButton, .pressedButton:active, .pressedButton:hover {
+  background-color: @secondaryColor;
+  background-size: contain;
+}
+
+.pressedButton:hover {
+  background-color: @secondaryColor;
+  background-size: contain;
+}
+
+.pressedButton:active {
+  background-color: @secondaryColor;
+}
+
+.disabledButton, .disabledButton:hover, .disabledButton:active {
+  background-color: @tertiaryColorLight;
+  color: @tertiaryColor;
+}
+
+.fontAweSomeButton {
+  padding: 4px;
+  margin: 2px;
+  margin-bottom: 5px;
+  font-size: 23px;
+  .unselectable;
+}
+
+.fontAweSomeButtonSmall {
+  padding: 2px;
+  margin: 2px;
+  margin-bottom: 2px;
+  font-size: 17px;
+  .unselectable;
+}
+
+.fontAweSomeButtonLarge {
+  padding: 6px;
+  margin: 2px;
+  margin-bottom: 5px;
+  font-size: 29px;
+  .unselectable;
+}
+
+.golabDroppable {
+  border: 2px dotted @secondaryColor !important;
+}
+
+.dropObjectOutSideDropArea {
+  opacity: 0.35;
+}
+

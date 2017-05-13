@@ -1,0 +1,152 @@
+/*  $Id$	-*- mode: javascript -*-
+ *  
+ *  File	drag_drop_gesture.src
+ *  Part of	Cute
+ *  Author	Anjo Anjewierden, a.a.anjewierden@utwente.nl
+ *  Purpose	Definition of class DragDropGesture
+ *  Works with	SWI-Prolog (www.swi-prolog.org)
+ *  
+ *  Notice	Copyright (c) 2012  University of Twente
+ *  
+ *  History	16/07/12  (Created)
+ *  		16/07/12  (Last modified)
+ */
+
+/*------------------------------------------------------------
+ *  Class cute.DragDropGesture
+ *------------------------------------------------------------*/
+/*  Use with gcc -E -x c -P -C *.h > *.js 
+ */
+
+"use strict";
+
+(function() {
+    var cute = this.cute;
+
+    var DragDropGesture = cute.DragDropGesture = function() {
+        var g = this;
+
+        cute.MoveGesture.call(g);
+        g._target = undefined;
+        g._middle = true;
+        if ('ontouchend' in document)
+            g._hover_above = 35; // Number of pixels to shift receiver to make
+        else // it visible on touch devices 
+            g._hover_above = 0;
+
+        return g;
+    }
+
+    ist.extend(DragDropGesture, cute.MoveGesture);
+
+    DragDropGesture.prototype.toString = function() {
+        var g = this;
+        return "DragDropGesture(" + g._offset._x + ", " + g._offset._y + ")";
+    }
+
+
+    DragDropGesture.prototype.middle = function(bool) {
+        var g = this;
+
+        if (bool === undefined)
+            return g._middle;
+        g._middle = bool;
+
+        return g;
+    }
+
+    DragDropGesture.prototype.hover_above = function(val) {
+        var g = this;
+
+        if (val === undefined)
+            return g._hover_above;
+        g._hover_above = val;
+
+        return g;
+    }
+
+    DragDropGesture.prototype.initiate = function(ev) {
+        var g = this;
+        var gr = ev._receiver;
+
+        if (ev._type === 'mouse_down' && g.modifiers_match(ev)) {
+            g._offset._x = ev._x;
+            g._offset._y = ev._y;
+            g._initial_x = gr._area._x;
+            g._initial_y = gr._area._y;
+
+            if (g._hover_above) {
+                var abs = gr.absolute_xy();
+                var desired_x = abs.x + gr.width() / 2;
+                var desired_y = abs.y + gr.height();
+                var dx = ev._x - desired_x;
+                var dy = ev._y - desired_y;
+
+                gr.relative_move_xy(dx, dy-g._hover_above);
+                gr.device().modified();
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    DragDropGesture.prototype.verify = function(ev) {
+    }
+
+    DragDropGesture.prototype.pointed_objects = function(ev) {
+        var g = this;
+        var dev = ev._device;
+        var pointed = new Array();
+        var x, y;
+
+        if (g.middle()) {
+            var gr = g._receiver;
+            var abs = gr.absolute_xy();
+
+            x = abs.x + gr._area._w/2;
+            y = abs.y + gr._area._h/2;
+        } else {
+            x = ev._x;
+            y = ev._y;
+        }
+        dev.pointed_objects(x, y, pointed);
+        pointed.reverse();
+
+        return pointed;
+    }
+
+    DragDropGesture.prototype.terminate = function(ev) {
+        var g = this;
+        var dev = ev._device;
+        var gr = g._receiver;
+        var pointed;
+        var i;
+
+        pointed = g.pointed_objects(ev);
+
+        g._target = undefined;
+        for (i=0; i<pointed.length && !g._target; i++) {
+            var target = pointed[i];
+
+            if (gr === target)
+                continue;
+            if (target.drop_target) {
+                switch (target.drop_target(gr, g)) {
+                case true:
+                    g._target = target;
+                    break;
+                case false:
+                    continue;
+                case 'refuse':
+                    return g; // TBD -- really exit here?
+                }
+            }
+        }
+
+        gr.set(g._initial_x, g._initial_y);
+        dev.modified();
+
+        return g;
+    }
+}).call(this);

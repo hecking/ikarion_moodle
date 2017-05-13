@@ -1,0 +1,17 @@
+@charset "utf-8";
+.pleaseWaitIcon {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 115px;
+  height: 115px;
+  margin-top: -57.5px;
+  /* half the height */
+
+  margin-left: -57.5px;
+  /* half the width */
+
+  background: url("../images/loading-animation.gif") center no-repeat;
+  background-size: 115px;
+}

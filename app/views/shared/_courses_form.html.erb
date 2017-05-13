@@ -1,0 +1,27 @@
+<div class="ui form">
+  <%= form_for(@course, html: { multipart: true }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label "Scored concepts list" %>
+      <%= f.file_field :concepts, accept: 'text/csv' %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Activity Log" %>
+      <%= f.file_field :activity_log, accept: 'text/csv' %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Student generated content" %>
+      <%= f.file_field :student_generated_content, accept: 'text/csv' %>
+    </div>
+
+    <%= f.submit "New Course", class: "ui button" %>
+  <% end %>
+
+</div>

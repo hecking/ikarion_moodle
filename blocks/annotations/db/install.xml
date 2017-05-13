@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="blocks/annotations/db" VERSION="2015120800" COMMENT="XMLDB file for Moodle blocks/annotations" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+	<TABLES>
+		<TABLE NAME="annotations" COMMENT="database entry">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="id of the annotations" NEXT="courseid"/>
+				<FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="id of the course" PREVIOUS="id" NEXT="contextid"/>
+				<FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Id of context" PREVIOUS="courseid" NEXT="hashtag"/>
+				<FIELD NAME="hashtag" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="text of hashtag" PREVIOUS="contextid" NEXT="tagtype"/>
+				<FIELD NAME="tagtype" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="type of tags" PREVIOUS="hashtag" NEXT="annotation"/>
+				<FIELD NAME="annotation" TYPE="text" LENGTH="medium" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="text of annotation" PREVIOUS="tagtype" NEXT="timecreated"/>
+				<FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="" PREVIOUS="annotation" NEXT="timemodified"/>
+				<FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="" PREVIOUS="timecreated" NEXT="userid"/>
+				<FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="id of user" PREVIOUS="timemodified"/>
+			</FIELDS>
+				<KEYS>
+					<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+				</KEYS>
+					<INDEXES>
+						<INDEX NAME="contextid" UNIQUE="false" FIELDS="contextid"/>
+					</INDEXES>
+		</TABLE>
+		
+		<TABLE NAME="annotations_comments" COMMENT="database entry">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="id of the annotations" NEXT="contextid"/>
+				<FIELD NAME="annotid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Id of context" PREVIOUS="id" NEXT="hashtag"/>
+				<FIELD NAME="comment" TYPE="text" LENGTH="medium" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="text of annotation" PREVIOUS="tagtype" NEXT="timecreated"/>
+				<FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="" PREVIOUS="annotation" NEXT="userid"/>
+				<FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="id of user" PREVIOUS="timecreated"/>
+			</FIELDS>
+				<KEYS>
+					<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+				</KEYS>
+				
+				<INDEXES>
+						<INDEX NAME="IDX_ANNOTID" UNIQUE="false" FIELDS="annotid"/>
+				</INDEXES>
+					
+		</TABLE>
+	</TABLES>
+</XMLDB>

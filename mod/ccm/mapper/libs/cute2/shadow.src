@@ -1,0 +1,59 @@
+/*  $Id$	-*- mode: javascript -*-
+ *  
+ *  File	shadow.src
+ *  Part of	Cute
+ *  Author	Anjo Anjewierden, a.a.anjewierden@utwente.nl
+ *  Purpose	Definition of class Shadow
+ *  Works with	SWI-Prolog (www.swi-prolog.org)
+ *  
+ *  Notice	Copyright (c) 2012  University of Twente
+ *  
+ *  History	17/09/12  (Created)
+ *  		17/09/12  (Last modified)
+ */ 
+
+/*------------------------------------------------------------
+ *  Class cute.Shadow
+ *------------------------------------------------------------*/
+
+#include "../h/js.h"
+
+"use strict";
+
+(function() {
+    var cute = this.cute;
+
+    cute.Shadow = function(colour, blur, offset_x, offset_y) {
+        var sh = this;
+
+        if (colour instanceof cute.Colour)
+            sh._colour = colour.css();
+        else
+            sh._colour = default(colour, 'black');
+        sh._blur = default(blur, 0);
+        sh._offset_x = default(offset_x, 0);
+        sh._offset_y = default(offset_y, 0);
+
+        return sh;
+    }
+
+    cute.Shadow.prototype.render_canvas = function(ctx) {
+        var sh = this;
+
+        ctx.shadowColor = sh._colour;
+        ctx.shadowBlur = sh._blur;
+        ctx.shadowOffsetX = sh._offset_x;
+        ctx.shadowOffsetY = sh._offset_y;
+
+        return sh;
+    }
+
+    cute.Shadow.prototype.render_reset = function(ctx) {
+        ctx.shadowColor = '#000000';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        return this;
+    }
+}).call(this);

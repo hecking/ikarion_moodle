@@ -1,0 +1,258 @@
+/*  $Id$	-*- mode: javascript -*-
+ *  
+ *  File	connection.src
+ *  Part of	Cute
+ *  Author	Anjo Anjewierden, a.a.anjewierden@utwente.nl
+ *  Purpose	Definition of class Connection
+ *  Works with	SWI-Prolog (www.swi-prolog.org)
+ *  
+ *  Notice	Copyright (c) 2012  University of Twente
+ *  
+ *  History	11/07/12  (Created)
+ *  		11/07/12  (Last modified)
+ */ 
+
+/*------------------------------------------------------------
+ *  Class Connection
+ *------------------------------------------------------------*/
+
+#include "../h/js.h"
+
+"use strict";
+
+(function() {
+    var cute = this.cute;
+
+    var Connection = cute.Connection = function(from, to, link, from_handle, to_handle) {
+        var c = this;
+
+        cute.Line.call(c, 0,0,0,0);
+        if (!link)
+            link = new cute.Link();
+        cute.Line.prototype.copy.call(c, link._line);
+
+        c._link = link;
+        c._from_handle = from_handle || null;
+        c._to_handle = to_handle || null;
+        c._fixed_from = (from_handle ? true : false);
+        c._fixed_to = (to_handle ? true : false);
+
+        return c.relate(from, to);
+    }
+
+    extend(Connection, cute.Line);
+
+    Connection.prototype.toString = function() {
+        var cn = this;
+        var c = ", ";
+        return "connection(" + cn._from + c + cn._to + c + cn._link + ")";
+    }
+
+    Connection.prototype.unlink = function() {
+        var c = this;
+
+        if (c._from) c._from.detach_connection(c);
+        if (c._to) c._to.detach_connection(c);
+
+        cute.Graphical.prototype.unlink.call(c);
+
+        return c;
+    }
+
+    Connection.prototype.relate = function(from, to) {
+        var c = this;
+
+        if (from != c._from && c._from) {
+            c._from.detach_connection(c);
+            c._from = null;
+        }
+
+        if (to != c._to && c._to) {
+            c._to.detach_connection(c);
+            c._to = null;
+        }
+
+        if (from) {
+            from.attach_connection(c);
+            c._from = from;
+        }
+
+        if (to) {
+            to.attach_connection(c);
+            c._to = to;
+        }
+
+      return c.update_device();
+    }
+
+
+    Connection.prototype.update_device = function() {	// Internal?
+        var c = this;
+        var from = this._from;
+        var to = this._to;
+        var dev;
+
+        if (!from || !to || !(dev = from.common_device(to)))
+            return c.device(null);
+        c.device(dev);
+
+        return c.request_compute();
+    }
+
+
+    function available_from_handles(c, gr) {
+        if (c._from_handle && c._fixed_from)
+            return [gr.get_handle(c._from_handle)];
+        return available_handles(c, c._link._from, gr);
+    }
+
+    function available_to_handles(c, gr) {
+        if (c._to_handle && c._fixed_to)
+            return [gr.get_handle(c._to_handle)];
+        return available_handles(c, c._link._to, gr);
+    }
+
+    function available_handles(c, kind, gr) {
+        var handles = [];
+        var hdls = gr._handles;
+
+        for (var i=0; i<hdls.length; i++) {
+            var h = hdls[i];
+            if (h._kind == kind)
+                handles.push(h);
+        }
+
+        return handles;
+    }
+
+    /*  Find the best handles and return the connection points in result.
+        Implementation is naive, it finds the matching handles in from and to that
+        have the shortest distance.
+     */
+
+    Connection.prototype.connection_points = function(from, to, result) {
+        var c = this;
+        var hfs = available_from_handles(c, from);
+        var hts = available_to_handles(c, to);
+        var dev = c._device;
+        var xfs = new Array(hfs.length);
+        var yfs = new Array(hfs.length);
+        var xts = new Array(hts.length);
+        var yts = new Array(hts.length);
+
+        for (var i=0; i<hfs.length; i++) {
+            var xy = hfs[i].xy(from, dev);
+            xfs[i] = xy.x;
+            yfs[i] = xy.y;
+        }
+        for (var i=0; i<hts.length; i++) {
+            var xy = hts[i].xy(to, dev);
+            xts[i] = xy.x;
+            yts[i] = xy.y;
+        }
+
+        var bestf = 0, bestt = 0, bestd = Infinity;
+        var found = false;
+
+        for (var i=0; i<hfs.length; i++) {
+            for (var j=0; j<hts.length; j++) {
+                var d = geo.distance(xfs[i], yfs[i], xts[j], yts[j]);
+                if (found === false || d < bestd) {
+                    bestd = d;
+                    bestf = i;
+                    bestt = j;
+                    found = true;
+                }
+            }
+        }
+
+        if (found) {
+            var hf = hfs[bestf];
+            var ht = hts[bestt];
+
+            result.x1 = xfs[bestf];
+            result.y1 = yfs[bestf];
+            result.x2 = xts[bestt];
+            result.y2 = yts[bestt];
+
+            c._from_handle = hf._name;
+            c._to_handle = ht._name;
+            return true;
+        }
+
+        return false;
+    }
+
+    Connection.prototype.update_line = function(x1, y1, x2, y2) {
+        var c = this;
+
+        if (x1 != cute.Line.prototype.start_x.call(c) ||
+            y1 != cute.Line.prototype.start_y.call(c) ||
+            x2 != cute.Line.prototype.end_x.call(c) ||
+            y2 != cute.Line.prototype.end_y.call(c))
+            c.points(x1, y1, x2, y2);
+        return this;
+    }
+
+    Connection.prototype.compute = function() {
+        var c = this;
+
+        if (c._request_compute) {
+            var from = c._from;
+            var to = c._to;
+            var dev = c._device;
+
+            if (from.is_displayed(dev) && to.is_displayed(dev)) {
+                var r = {x1: 0, y1:0, x2: 0, y2: 0};
+
+                if (c.connection_points(from, to, r)) {
+                    c.update_line(r.x1, r.y1, r.x2, r.y2);
+                    cute.Line.prototype.compute.call(c);
+                    c.displayed(true);
+                    c._request_compute = false;
+                    return this;
+                }
+            }
+            c._request_compute = false;
+            c.displayed(false);
+        }
+
+        return this;
+    }
+
+    var connection_in_points = 0;
+
+    Connection.prototype.points = function(x1, y1, x2, y2) {
+        connection_in_points++;
+        cute.Line.prototype.points.call(this, x1, y1, x2, y2);
+        connection_in_points--;
+
+        return this;
+    }
+
+    Connection.prototype.geometry = function(x, y, w, h) {
+        if (connection_in_points > 0)
+            cute.Graphical.prototype.geometry(x, y, w, h);
+        return this;
+    }
+
+    Connection.prototype.opposite = function(gr) {
+        var c = this;
+
+        if (c._to === gr)
+            return c._from;
+        if (c._from === gr)
+            return c._to;
+        return null;
+    }
+
+    Connection.prototype.update_link_attributes = function() {
+        var c = this;
+        var proto = c._link._line;
+
+        c._pen = proto._pen;
+        c.set_arrows(proto._first_arrow, proto._second_arrow);
+
+        return c.request_compute();
+    }
+}).call(this);

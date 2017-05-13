@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="83cef62e-f3df-4f88-9110-931b83aaad93" name="Default" comment="" />
+    <ignored path="libs.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="libs" />
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="Moments ago" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\h\js.h</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\geometry\geometry.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\geometry\geometry.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute\Makefile</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\gesture.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\drawable.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\path.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\connection.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\context.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\circle.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\move_gesture.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\euclid.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\test.html</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\ellipse.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\draw.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\connection.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\gesture.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\test.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\figure.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\constraint_move_gesture.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\joint.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\text.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\size.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\box.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\test.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\handle.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\link.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\joint.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\drag_drop_gesture.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\main.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\cute.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\shadow.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\Makefile</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\point.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\arrow.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\handle.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\path.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\area.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\size.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\drag_drop_gesture.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\canvas.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\move_gesture.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\solver.c</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\drawable.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\font.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\canvas.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\arrow.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\event.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\ellipse.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\resize_gesture.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\device.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\text.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\colour.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\box.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\graphical.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\font.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\modifier.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\device.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\resize_gesture.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\circle.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\colour.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\euclid.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\area.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\click_gesture.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\context.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\line.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\point.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\demo.c</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\graphical.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\figure.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\click_gesture.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\modifier.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\plane.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\line.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\constraint_move_gesture.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\link.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\plane.src</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\event.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\cute2\main.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\js\jquery.cookie.min.js</PATH>
+            <PATH vcs="svn" revision="1183">C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs\js\angular\localStorageModule.min.js</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with tree conflicts" />
+          <option name="myStatusName" value="Merged with tree conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with property conflicts" />
+          <option name="myStatusName" value="Will be merged with property conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="false">C:\Users\hecking\AppData\Roaming\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs" />
+          <option name="myCopyRoot" value="C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs" />
+          <option name="myCopyRoot" value="C:\Users\hecking\IdeaProjects\GoLabLABackend\trunk\client\libs" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83cef62e-f3df-4f88-9110-931b83aaad93" name="Default" comment="" />
+      <created>1400837736500</created>
+      <updated>1400837736500</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.670282" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+</project>
+

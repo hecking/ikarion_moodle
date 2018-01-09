@@ -31,6 +31,7 @@ class Controller extends PhpObj {
         '\mod_forum\event\course_module_viewed' => 'ModuleEvent',
         '\mod_forum\event\discussion_viewed' => 'DiscussionEvent',
         '\mod_forum\event\user_report_viewed' => 'ModuleEvent',
+        '\mod_forum\event\post_created' => 'ForumPostEvent', // New event T.H.
         '\mod_book\event\course_module_viewed' => 'ModuleEvent',
         '\mod_scorm\event\course_module_viewed' => 'ModuleEvent',
         '\mod_resource\event\course_module_viewed' => 'ModuleEvent',

@@ -366,4 +366,17 @@ class Repository extends PhpObj {
         $model = $this->read_object($scoid, 'scorm_scoes');
         return $model;
     }
+
+    // Forum post extension T.H.
+    /**
+     * Reads a forum post
+     * @param String id
+     * @return Forum post entry
+     */
+    public function read_forum_post($postid) {
+
+        $model = $this->read_object($id, 'forum_discussions');
+
+        return $model;
+    }
 }

@@ -86,7 +86,9 @@ class RemoteLRS implements LRSInterface
             //
             // this is here for some proxy handling
             //
-            'request_fulluri' => 1,
+            // T.H. The default value of this parameter is 1. This causes problems with remote learning record stors (LRS)
+            // that require relative urls.
+            'request_fulluri' => 0,
 
             //
             // switching this to false causes non-2xx/3xx status codes to throw exceptions

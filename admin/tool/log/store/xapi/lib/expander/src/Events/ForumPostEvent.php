@@ -19,9 +19,11 @@ class ForumPostEvent extends Event {
      */
     public function read(array $opts) {
         $post = $this->repo->read_forum_post($opts['objectid']);
+        $discussion = $this->repo->read_discussion($post->discussion);
         return array_merge(parent::read($opts), [
-            'content' => $post->message,
-            'subject' => $post->subject
+            'post' => $post,
+            'discussion' => $discussion,
+            'module' => $this->repo->read_module($discussion->forum, 'forum')
         ]);
     }
 }

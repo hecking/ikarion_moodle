@@ -375,7 +375,7 @@ class Repository extends PhpObj {
      */
     public function read_forum_post($postid) {
 
-        $model = $this->read_object($id, 'forum_discussions');
+        $model = $this->read_object($postid, 'forum_posts');
 
         return $model;
     }

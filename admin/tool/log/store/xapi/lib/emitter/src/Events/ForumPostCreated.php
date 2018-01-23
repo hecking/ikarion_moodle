@@ -10,6 +10,10 @@ namespace XREmitter\Events;
 defined('MOODLE_INTERNAL') || die();
 
 class ForumPostCreated extends Event {
+
+    protected static $verbdisplay = [
+        'en' => 'post'
+    ];
     /**
      * Reads data for an event.
      * @param [String => Mixed] $opts

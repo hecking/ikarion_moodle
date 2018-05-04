@@ -115,7 +115,7 @@ function forum_add_instance($forum, $mform = null) {
             $discussion->assessed      = $forum->assessed;
             //$discussion->message       = '<b>' . $group->name . ':</b><br>' . $forum->intro;
             $discussion->message       = '<b>' . $group->name . " ("
-                . implode(", ", array_map(function($user) {$user->firstname . " " . $user->lastname;}, groups_get_members($group)))
+                . implode(", ", array_map(function($user) {return $user->firstname . " " . $user->lastname;}, groups_get_members($group)))
                 .'):</b><br>' . $forum->intro; // MODIFIED. Add list of group members in the first post. TH
             $discussion->messageformat = $forum->introformat;
             $discussion->messagetrust  = trusttext_trusted(context_course::instance($forum->course));

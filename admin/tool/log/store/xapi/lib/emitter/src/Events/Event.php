@@ -37,6 +37,7 @@ abstract class Event extends PhpObj {
                 'extensions' => [
                     $opts['context_ext_key'] => $opts['context_ext'],
                     'http://lrs.learninglocker.net/define/extensions/info' => $opts['context_info'],
+                    'http://collide.info/extensions/group' => $opts['usergroups']
                 ],
                 'contextActivities' => [
                     'grouping' => [
@@ -156,5 +157,4 @@ abstract class Event extends PhpObj {
         $lang = isset(static::$verbdisplay[$lang]) ? $lang : array_keys(static::$verbdisplay)[0];
         return [$lang => static::$verbdisplay[$lang]];
     }
-
 }

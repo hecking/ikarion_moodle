@@ -38,10 +38,14 @@ class Event extends PhpObj {
      * @return [String => Mixed]
      */
     public function read(array $opts) {
+        $groups = groups_get_all_groups($opts['courseid'], $opts['userid']);
+        $fp = fopen('vardump.txt', 'w');
+        fwrite($fp, $opts['userid'] . " " . count($groups) . " : ". serialize($groups) . "\n\n");
+        fclose($fp);
         return [
             'user' => $opts['userid'] < 1 ? null : $this->repo->read_user($opts['userid']),
             'relateduser' => $opts['relateduserid'] < 1 ? null : $this->repo->read_user($opts['relateduserid']),
-            'usergroups' =>  groups_get_user_groups($opts['courseid'], $opts['userid']), // MODIFIED. Add information about the groups a users is in. T.H.
+            'usergroups' =>  groups_get_all_groups($opts['courseid'], $opts['userid']), // MODIFIED. Add information about the groups a users is in. T.H.
             'course' => $this->repo->read_course($opts['courseid']),
             'app' => $this->repo->read_site(),
             'info' => (object) [

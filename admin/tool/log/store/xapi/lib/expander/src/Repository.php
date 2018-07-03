@@ -390,7 +390,7 @@ class Repository extends PhpObj {
     public function read_wiki_page($id) {
 
         $model = $this->read_object($id, 'wiki_pages');
-
+        $model->url = $this->cfg->wwwroot . '/mod/wiki/view.php?pageid=' .$id;
         return $model;
     }
 }

@@ -379,4 +379,18 @@ class Repository extends PhpObj {
 
         return $model;
     }
+
+
+    // Wiki update extension T.H.
+    /**
+     * Reads a wiki page
+     * @param String id
+     * @return Wiki page entry
+     */
+    public function read_wiki_page($id) {
+
+        $model = $this->read_object($id, 'wiki_pages');
+
+        return $model;
+    }
 }

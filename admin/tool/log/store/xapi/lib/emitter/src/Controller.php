@@ -43,7 +43,8 @@ class Controller extends PhpObj {
         'training_session_unenrol' => 'EventUnenrol',
         'scorm_scoreraw_submitted' => 'ScormScoreRawSubmitted',
         'scorm_status_submitted' => 'ScormStatusSubmitted',
-        'post_created' => 'ForumPostCreated'
+        'post_created' => 'ForumPostCreated',
+        'page_updated' => 'WikiPageUpdated'
     ];
 
     /**

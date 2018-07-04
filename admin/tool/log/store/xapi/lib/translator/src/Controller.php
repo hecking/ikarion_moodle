@@ -42,6 +42,7 @@ class Controller extends PhpObj {
         '\mod_lesson\event\course_module_viewed' => 'ModuleViewed',
         '\mod_lti\event\course_module_viewed' => 'ModuleViewed',
         '\mod_wiki\event\course_module_viewed' => 'ModuleViewed',
+        '\mod_wiki\event\page_updated' => 'WikiPageUpdated',
         '\mod_workshop\event\course_module_viewed' => 'ModuleViewed',
         '\mod_chat\event\course_module_viewed' => 'ModuleViewed',
         '\mod_glossary\event\course_module_viewed' => 'ModuleViewed',
@@ -82,7 +83,9 @@ class Controller extends PhpObj {
     public function create_events(array $events) {
         $results = [];
         foreach ($events as $index => $opts) {
+            error_log(serialize($opts));
             $route = isset($opts['event']['eventname']) ? $opts['event']['eventname'] : '';
+            error_log("ROUTE: " . $route);
             if (isset(static::$routes[$route])) {
                 $routeevents = is_array(static::$routes[$route]) ? static::$routes[$route] : [static::$routes[$route]];
                 foreach ($routeevents as $routeevent) {

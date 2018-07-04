@@ -115,6 +115,10 @@ abstract class Event extends PhpObj {
         return $this->read_activity($opts, 'post');
     }
 
+    protected function read_page($opts) {
+        return $this->read_activity($opts, 'page');
+    }
+
     protected function read_question($opts) {
         $opts['question_type'] = 'http://adlnet.gov/expapi/activities/cmi.interaction';
         $question = $this->read_activity($opts, 'question');

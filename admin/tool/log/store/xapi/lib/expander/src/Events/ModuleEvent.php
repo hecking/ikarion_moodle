@@ -26,6 +26,7 @@ class ModuleEvent extends Event {
      * @override Event
      */
     public function read(array $opts) {
+
         return array_merge(parent::read($opts), [
             'module' => $this->repo->read_module($opts['objectid'], $opts['objecttable']),
         ]);

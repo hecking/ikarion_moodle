@@ -19,8 +19,13 @@ class WikiPageEvent extends Event {
      */
     public function read(array $opts) {
 
+        $page = $this->repo->read_wiki_page($opts['objectid']);
+        $subwiki = $this->repo->read_subwiki($page->subwikiid);
+        $wiki = $this->repo->read_module($subwiki->wikiid, 'wiki');
+
         return array_merge(parent::read($opts), [
-           'page' => $this->repo->read_wiki_page($opts['objectid'])
+           'page' => $page,
+           'module' => $wiki
         ]);
     }
 }

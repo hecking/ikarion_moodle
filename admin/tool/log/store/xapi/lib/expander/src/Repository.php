@@ -391,6 +391,20 @@ class Repository extends PhpObj {
 
         $model = $this->read_object($id, 'wiki_pages');
         $model->url = $this->cfg->wwwroot . '/mod/wiki/view.php?pageid=' .$id;
+
+        return $model;
+    }
+
+    // Wiki update extension T.H.
+    /**
+     * Reads a subwiki
+     * @param String id
+     * @return Wiki page entry
+     */
+    public function read_subwiki($id) {
+
+        $model = $this->read_object($id, 'wiki_subwikis');
+
         return $model;
     }
 }

@@ -21,18 +21,18 @@ class WikiPageUpdated extends Event {
      * @override Event
      */
     public function read(array $opts) {
-        error_log("EMIT PAGE EVENT");
+
         return array_merge_recursive(parent::read($opts), [
             'verb' => [
                 'id' => 'http://id.tincanapi.com/verb/updated',
                 'display' => $this->read_verb_display($opts),
             ],
-            'object' => $this->read_post($opts, 'post', $opts['post_type']),
+            'object' => $this->read_page($opts, 'page', $opts['page_type']),
             'context' => [
                 'contextActivities' => [
                     'grouping' => [
                         $this->read_course($opts, 'course', 'http://adlnet.gov/expapi/activities/course'),
-                        $this->read_module($opts),
+                        $this->read_module($opts)
                     ],
                 ],
             ],

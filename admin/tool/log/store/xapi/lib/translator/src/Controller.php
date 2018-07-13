@@ -83,9 +83,8 @@ class Controller extends PhpObj {
     public function create_events(array $events) {
         $results = [];
         foreach ($events as $index => $opts) {
-            error_log(serialize($opts));
+
             $route = isset($opts['event']['eventname']) ? $opts['event']['eventname'] : '';
-            error_log("ROUTE: " . $route);
             if (isset(static::$routes[$route])) {
                 $routeevents = is_array(static::$routes[$route]) ? static::$routes[$route] : [static::$routes[$route]];
                 foreach ($routeevents as $routeevent) {

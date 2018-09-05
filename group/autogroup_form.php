@@ -45,7 +45,7 @@ class autogroup_form extends moodleform {
      * Form Definition
      */
     function definition() {
-        global $CFG, $COURSE;
+        global $CFG, $COURSE, $DB;
 
         $mform =& $this->_form;
 
@@ -305,12 +305,59 @@ class autogroup_form extends moodleform {
         $mform->addElement('hidden','seed');
         $mform->setType('seed', PARAM_INT);
 
+        // task Form Here
+        $mform->addElement('header', 'grouptaskhdr', get_string('grouptaskhdr', 'group'));
+        $mform->setExpanded('grouptaskhdr', true);
+
+//        $table = 'assign';
+//        $conditions = array('course' => $COURSE->id);
+//        $assignmentRecords = $DB->get_records($table, $conditions, $sort='', $fields='*', $limitfrom=0, $limitnum=0);
+//        $assignmentNames = array();
+//        foreach ($assignmentRecords as $am){
+//            // print_object($am);
+//            $assignmentNames[$am->id] = $am->name;
+//            // $assignmentNames[] = $am->name;
+//        }
+
+        // name of task
+        $mform->addElement('text', 'taskname', get_string('taskname', 'group'));
+        $mform->setType('taskname', PARAM_TEXT);
+        // start and end date
+        $name = get_string('startdate', 'group');
+        $options = array('optional'=>false);
+        $mform->addElement('date_time_selector', 'startdate', $name, $options);
+
+        $name = get_string('enddate', 'group');
+        $mform->addElement('date_time_selector', 'enddate', $name, array('optional'=>false));
+        $tasktypelist = get_string('tasktypelist', 'group');
+        $mform->addElement('select', 'tasktype', get_string('tasktype', 'group'), $tasktypelist);
+
+        // multiple select form for activities
+
+        // get info for modules in course
+        $modinfo = get_fast_modinfo($COURSE->id);
+        $activitylist = array();
+        foreach($modinfo->get_cms() as $cm) {
+            if($this->_instance != $cm->instance) {
+                $activitylist[$cm->id] = $cm->get_formatted_name();
+            }
+        }
+
+
+        $select = $mform->addElement('select', 'activities', get_string('activities', 'group'), $activitylist);
+        $select->setMultiple(true);
+
+
+        // task Form ENd
+
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'preview', get_string('preview'));
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('submit'));
         $buttonarray[] = &$mform->createElement('cancel');
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
         $mform->closeHeaderBefore('buttonar');
+
+
     }
 
     /**

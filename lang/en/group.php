@@ -47,6 +47,17 @@ $string['kpi'] = 'CohortPerformanceIndex of';
 $string['all'] = 'Group Formation';
 // New!
 
+// group task begin
+$string['activities'] = 'Activities';
+$string['grouptaskhdr'] = 'Group Task';
+$string['startdate'] = 'Start Date';
+$string['enddate'] = 'End Date';
+$string['taskname'] = 'Task Name';
+$string['tasktype'] = 'Task Type';
+$string['tasktypelist'] = array('collaborative wiki writing' =>'collaborative wiki writing',
+    'collaborative programming'=>'collaborative programming', 'presentation'=>'presentation');
+
+
 $string['addedby'] = 'Added by {$a}';
 $string['addgroup'] = 'Add user into group';
 $string['addgroupstogrouping'] = 'Add group to grouping';

@@ -62,7 +62,13 @@ class Event extends PhpObj {
                     'name'=>$group->name,
                     'description' => ($group->description == '') ? 'none' : $group->description,
                     'timecreated'=>$group->timecreated,
-                    'timemodified'=>$group->timemodified];
+                    'timemodified'=>$group->timemodified,
+                    'task_id'=>$group->task_id,
+                    'task_name'=>$group->task_name,
+                    'task_start'=>$group->task_start,
+                    'task_end'=>$group->task_end,
+                    'task_type'=>$group->task_type,
+                    'task_resources'=>$group->task_resources];
             }, $opts['usergroups'])// MODIFICATION. Handle user groups. T.H.
         ]];
     }

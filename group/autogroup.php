@@ -45,6 +45,8 @@ $groupmembercount = optional_param('groupmembercount', null, PARAM_INT);
 $delimiter = optional_param('delimiter', null, PARAM_RAW);
 //!New
 
+
+
 $PAGE->set_url('/group/autogroup.php', array('courseid' => $courseid));
 
 if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
@@ -366,6 +368,36 @@ if ($editform->is_cancelled()) {
         }
 
         // Save the groups data
+        // task code inserted here
+
+        // dbdata
+        $grouptasktable = 'group_task';
+        $grouptasktogroupmappingtable = 'group_task_mapping';
+        $taskmodulemappingtable = 'task_module_mapping';
+        // taskdata
+        $taskname = $data->taskname;
+        $startdate = $data->startdate;
+        $enddate = $data->enddate;
+        $tasktype = $data->tasktype;
+
+        $taskrecord = new stdClass();
+        $taskrecord->taskname = $data->taskname;
+        $taskrecord->startdate = $data->startdate;
+        $taskrecord->enddate = $data->enddate;
+        $taskrecord->tasktype = $data->tasktype;
+        $taskrecord->course = $courseid;
+
+        $taskid = $DB->insert_record($grouptasktable, $taskrecord);
+
+        // task module mapping (like forum, pdf, video)
+        $taskmodulemapping = $data->activities;
+        foreach ($taskmodulemapping as $moduleid){
+            $taskmodulerecord = new stdClass();
+            $taskmodulerecord->taskid = $taskid;
+            $taskmodulerecord->moduleid = $moduleid;
+            $DB->insert_record($taskmodulemappingtable, $taskmodulerecord);
+        }
+
         foreach ($groups as $key=>$group) {
             if (groups_get_group_by_name($courseid, $group['name'])) {
                 $error = get_string('groupnameexists', 'group', $group['name']);
@@ -376,6 +408,15 @@ if ($editform->is_cancelled()) {
             $newgroup->courseid = $data->courseid;
             $newgroup->name     = $group['name'];
             $groupid = groups_create_group($newgroup);
+
+            // task mapping
+            $mapping_record = new stdClass();
+            $mapping_record->groupid = $groupid;
+            $mapping_record->taskid = $taskid;
+            $DB->insert_record($grouptasktogroupmappingtable, $mapping_record);
+
+            // task mapping end
+
             $createdgroups[] = $groupid;
             foreach($group['members'] as $user) {
                 groups_add_member($groupid, $user->id);

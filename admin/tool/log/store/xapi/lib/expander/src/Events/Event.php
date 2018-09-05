@@ -21,14 +21,16 @@ defined('MOODLE_INTERNAL') || die();
 use \LogExpander\Repository as Repository;
 use \stdClass as PhpObj;
 
-class Event extends PhpObj {
+class Event extends PhpObj
+{
     protected $repo;
 
     /**
      * Constructs a new Event.
      * @param repository $repo
      */
-    public function __construct(Repository $repo) {
+    public function __construct(Repository $repo)
+    {
         $this->repo = $repo;
     }
 
@@ -37,18 +39,78 @@ class Event extends PhpObj {
      * @param [String => Mixed] $opts
      * @return [String => Mixed]
      */
-    public function read(array $opts) {
-
+    public function read(array $opts)
+    {
+        $usergroups = groups_get_all_groups($opts['courseid'], $opts['userid']);
+        $this->add_groups_tasks_context($usergroups);
+        $blabla = array();
         return [
             'user' => $opts['userid'] < 1 ? null : $this->repo->read_user($opts['userid']),
             'relateduser' => $opts['relateduserid'] < 1 ? null : $this->repo->read_user($opts['relateduserid']),
-            'usergroups' =>  groups_get_all_groups($opts['courseid'], $opts['userid']), // MODIFIED. Add information about the groups a users is in. T.H.
+            'usergroups' => $usergroups, // MODIFIED. Add information about the groups a users is in. T.H.
             'course' => $this->repo->read_course($opts['courseid']),
             'app' => $this->repo->read_site(),
-            'info' => (object) [
+            'info' => (object)[
                 'https://moodle.org/' => $this->repo->read_release(),
             ],
             'event' => $opts,
         ];
+    }
+
+    public function add_groups_tasks_context(array $groups)
+    {
+        //Add context data
+        global $DB;
+        foreach ($groups as $groupid => $group) {
+            $group_task_mapping_table = "group_task_mapping";
+            $task_table = "group_task";
+            $task_module_table = "task_module_mapping";
+            $condition = array("groupid" => $groupid);
+            // returns false if nothing found
+            $group_task_mapping_record = $DB->get_record($group_task_mapping_table, $condition);
+
+            if ($group_task_mapping_record) {
+                $taskid = $group_task_mapping_record->taskid;
+                $task_condition = array("id" => $taskid);
+                $task = $DB->get_record($task_table, $task_condition);
+                $task_module_condition = array("taskid" => $taskid);
+                $task_modules = $DB->get_records($task_module_table, $task_module_condition);
+                $group->task_id = $taskid;
+                $group->task_name = $task->taskname;
+                $group->task_start = $task->startdate;
+                $group->task_end = $task->enddate;
+                $group->task_type = $task->tasktype;
+                $resources = array();
+                $modids = array();
+                foreach ($task_modules as $mod) {
+                    $modids[] = $mod->moduleid;
+                }
+
+                $course_module_table = "course_modules";
+                $course_mod_record_list = $DB->get_records_list($course_module_table, "id", $modids);
+//                try {
+//                    foreach ($mod_record_list as $mod_r) {
+//                        $url_id = $this->repo->read_module($mod_r->id, $mod_r->name);
+//                        $resources[] = $url_id;
+//                    }
+//                } catch (Exception $e) {
+//                    $m = $e->getMessage();
+//                    echo "Exception", $m;
+//                }
+                $module_type_table = "modules";
+                foreach( $course_mod_record_list as $course_mod_record){
+                    $mod_type = $course_mod_record->module;
+                    $mod_constraint = array("id" => $mod_type);
+                    $mod_type_record = $DB->get_record($module_type_table, $mod_constraint);
+                    $module_data = $this->repo->read_module($course_mod_record->instance, $mod_type_record->name);
+                    $resources[] = $module_data->url;
+                }
+
+
+                $group->task_resources = $resources;
+
+            }
+        }
+
     }
 }

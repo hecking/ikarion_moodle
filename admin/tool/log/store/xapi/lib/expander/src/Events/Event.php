@@ -105,9 +105,33 @@ class Event extends PhpObj
                     $module_data = $this->repo->read_module($course_mod_record->instance, $mod_type_record->name);
                     $resources[] = $module_data->url;
                 }
-
-
                 $group->task_resources = $resources;
+
+                // groupmembers
+                $group_memeber_table = "groups_members";
+                $group_cond = array("groupid" => $groupid);
+                $group_memeber_records = $DB->get_records($group_memeber_table, $group_cond);
+                $userids = array();
+                foreach($group_memeber_records as $group_memeber){
+                    $userids[] = $group_memeber->userid;
+                }
+                $user_table = "user";
+                $user_records = $DB->get_records_list($user_table, "id", $userids);
+                $user_data_list = array();
+                foreach($user_records as $user_record){
+                    $full_name = $user_record->firstname." ".$user_record->lastname;
+                    $user_data = array("username" =>$user_record->username ,
+                        "email" => $user_record->email,
+                        "fullname" => $full_name);
+                    $user_data_list[] = $user_data;
+                }
+                $group->members = $user_data_list;
+
+
+
+
+
+
 
             }
         }

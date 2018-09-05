@@ -68,7 +68,8 @@ class Event extends PhpObj {
                     'task_start'=>$group->task_start,
                     'task_end'=>$group->task_end,
                     'task_type'=>$group->task_type,
-                    'task_resources'=>$group->task_resources];
+                    'task_resources'=>$group->task_resources,
+                    'group_members'=>$group->members];
             }, $opts['usergroups'])// MODIFICATION. Handle user groups. T.H.
         ]];
     }

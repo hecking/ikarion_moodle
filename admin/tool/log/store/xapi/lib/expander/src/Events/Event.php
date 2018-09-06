@@ -20,6 +20,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use \LogExpander\Repository as Repository;
 use \stdClass as PhpObj;
+use stdClass;
 
 class Event extends PhpObj
 {
@@ -68,18 +69,19 @@ class Event extends PhpObj
             $condition = array("groupid" => $groupid);
             // returns false if nothing found
             $group_task_mapping_record = $DB->get_record($group_task_mapping_table, $condition);
-
+            // task object that is added to group for use in xapi
+            $task_data = new stdClass();
             if ($group_task_mapping_record) {
                 $taskid = $group_task_mapping_record->taskid;
                 $task_condition = array("id" => $taskid);
                 $task = $DB->get_record($task_table, $task_condition);
                 $task_module_condition = array("taskid" => $taskid);
                 $task_modules = $DB->get_records($task_module_table, $task_module_condition);
-                $group->task_id = $taskid;
-                $group->task_name = $task->taskname;
-                $group->task_start = $task->startdate;
-                $group->task_end = $task->enddate;
-                $group->task_type = $task->tasktype;
+                $task_data->task_id = $taskid;
+                $task_data->task_name = $task->taskname;
+                $task_data->task_start = $task->startdate;
+                $task_data->task_end = $task->enddate;
+                $task_data->task_type = $task->tasktype;
                 $resources = array();
                 $modids = array();
                 foreach ($task_modules as $mod) {
@@ -105,7 +107,7 @@ class Event extends PhpObj
                     $module_data = $this->repo->read_module($course_mod_record->instance, $mod_type_record->name);
                     $resources[] = $module_data->url;
                 }
-                $group->task_resources = $resources;
+                $task_data->task_resources = $resources;
 
                 // groupmembers
                 $group_memeber_table = "groups_members";
@@ -126,6 +128,7 @@ class Event extends PhpObj
                     $user_data_list[] = $user_data;
                 }
                 $group->members = $user_data_list;
+                $group->task = $task_data;
 
 
 

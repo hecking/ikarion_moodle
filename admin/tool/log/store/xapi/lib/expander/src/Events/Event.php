@@ -83,22 +83,27 @@ class Event extends PhpObj
                 $task_data->task_end = $task->enddate;
                 $task_data->task_type = $task->tasktype;
                 $resources = array();
+                // Get mod ids to search for all task modules in course table
+                // use course records to create urls.
                 $modids = array();
                 foreach ($task_modules as $mod) {
                     $modids[] = $mod->moduleid;
                 }
 
+                // check if group forum exists.
+                // Single discussion in same forum created for each group
+                // Look up groupid in discussion table
+                $forum_discussion_table = "forum_discussions";
+                $forum_discussion_condition = array("groupid" => $groupid);
+                $group_forum_record = $DB->get_record($forum_discussion_table, $forum_discussion_condition);
+                if($group_forum_record){
+                    $module_data = $this->repo->read_module($group_forum_record->forum, "forum");
+                    $resources[] = $module_data->url;
+                }
+
+
                 $course_module_table = "course_modules";
                 $course_mod_record_list = $DB->get_records_list($course_module_table, "id", $modids);
-//                try {
-//                    foreach ($mod_record_list as $mod_r) {
-//                        $url_id = $this->repo->read_module($mod_r->id, $mod_r->name);
-//                        $resources[] = $url_id;
-//                    }
-//                } catch (Exception $e) {
-//                    $m = $e->getMessage();
-//                    echo "Exception", $m;
-//                }
                 $module_type_table = "modules";
                 foreach( $course_mod_record_list as $course_mod_record){
                     $mod_type = $course_mod_record->module;

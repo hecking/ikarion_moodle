@@ -112,11 +112,20 @@ switch ($action) {
         redirect(new moodle_url('/group/autogroup.php', array('courseid'=>$courseid)));
         break;
 
+        // Group Task
+    case 'showselectgrouptasks':
+        redirect(new moodle_url('/group/grouptask_select.php', array('courseid'=>$courseid)));
+        break;
+
     case 'showimportgroups':
         redirect(new moodle_url('/group/import.php', array('id'=>$courseid)));
         break;
 
     case 'showgroupsettingsform':
+        redirect(new moodle_url('/group/group.php', array('courseid'=>$courseid, 'id'=>$groupids[0])));
+        break;
+
+    case 'show':
         redirect(new moodle_url('/group/group.php', array('courseid'=>$courseid, 'id'=>$groupids[0])));
         break;
 
@@ -217,6 +226,10 @@ echo '<p><input type="submit" name="act_showautocreategroupsform" id="showautocr
 
 echo '<p><input type="submit" name="act_showimportgroups" id="showimportgroups" value="'
         . get_string('importgroups', 'core_group') . '" /></p>'."\n";
+
+// Group Task
+echo '<p><input type="submit" name="act_showselectgrouptasksform" id="showselectgrouptasks" value="'
+    . get_string('taskedit', 'group') . '" /></p>'."\n";
 
 echo html_writer::end_tag('div');
 echo html_writer::start_tag('div', array('class' => 'members'));

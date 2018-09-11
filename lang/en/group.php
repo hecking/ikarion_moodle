@@ -56,7 +56,9 @@ $string['taskname'] = 'Task Name';
 $string['tasktype'] = 'Task Type';
 $string['tasktypelist'] = array('collaborative wiki writing' =>'collaborative wiki writing',
     'collaborative programming'=>'collaborative programming', 'presentation'=>'presentation');
+$string['taskedit'] = 'Edit Group Tasks';
 
+// group task end
 
 $string['addedby'] = 'Added by {$a}';
 $string['addgroup'] = 'Add user into group';

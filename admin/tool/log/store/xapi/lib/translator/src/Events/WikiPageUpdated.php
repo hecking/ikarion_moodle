@@ -27,7 +27,7 @@ class WikiPageUpdated extends ModuleViewed {
             'page_type' => 'http://collide.info/moodle_wiki_page',
             'page_ext' => [
                 'content_raw' => $opts['page']->cachedcontent,
-                'content_clean' => strip_tags($opts['page']->cachedcontnet)
+                'content_clean' => html_entity_decode(strip_tags($opts['page']->cachedcontent))
             ],
             'page_ext_key' => 'http://collide.info/moodle_wiki_update'
         ])];

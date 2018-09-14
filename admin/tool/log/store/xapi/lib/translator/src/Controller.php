@@ -66,6 +66,8 @@ class Controller extends PhpObj {
         '\mod_facetoface\event\take_attendance' => 'FacetofaceAttend',
         '\mod_scorm\event\scoreraw_submitted' => 'ScormScoreRawSubmitted',
         '\mod_scorm\event\status_submitted' => 'ScormStatusSubmitted',
+        // ikarion
+        '\core\event\group_created' => 'GroupCreated',
     ];
 
     /**

@@ -66,6 +66,8 @@ class Controller extends PhpObj {
         '\core\event\course_completed' => 'CourseCompleted',
         '\mod_scorm\event\scoreraw_submitted' => 'ScormSubmitted',
         '\mod_scorm\event\status_submitted' => 'ScormSubmitted',
+        // ikarion
+        '\core\event\group_created' => 'GroupCreated'
     ];
 
     /**

@@ -44,7 +44,9 @@ class Controller extends PhpObj {
         'scorm_scoreraw_submitted' => 'ScormScoreRawSubmitted',
         'scorm_status_submitted' => 'ScormStatusSubmitted',
         'post_created' => 'ForumPostCreated',
-        'page_updated' => 'WikiPageUpdated'
+        'page_updated' => 'WikiPageUpdated',
+        //ikarion
+        'group_created' => 'GroupCreated',
     ];
 
     /**

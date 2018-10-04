@@ -306,18 +306,9 @@ class autogroup_form extends moodleform {
         $mform->setType('seed', PARAM_INT);
 
         // task Form Here
-        $mform->addElement('header', 'grouptaskhdr', get_string('grouptaskhdr', 'group'));
+        $mform->addElement('header', 'grouptaskhdr', get_string('grouptask', 'group'));
         $mform->setExpanded('grouptaskhdr', true);
 
-//        $table = 'assign';
-//        $conditions = array('course' => $COURSE->id);
-//        $assignmentRecords = $DB->get_records($table, $conditions, $sort='', $fields='*', $limitfrom=0, $limitnum=0);
-//        $assignmentNames = array();
-//        foreach ($assignmentRecords as $am){
-//            // print_object($am);
-//            $assignmentNames[$am->id] = $am->name;
-//            // $assignmentNames[] = $am->name;
-//        }
 
         // name of task
         $mform->addElement('text', 'taskname', get_string('taskname', 'group'));

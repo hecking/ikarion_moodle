@@ -113,8 +113,8 @@ switch ($action) {
         break;
 
         // Group Task
-    case 'showselectgrouptasks':
-        redirect(new moodle_url('/group/grouptask_select.php', array('courseid'=>$courseid)));
+    case 'showselectgrouptasksform':
+        redirect(new moodle_url('/group/group_task_select.php', array('courseid'=>$courseid)));
         break;
 
     case 'showimportgroups':
